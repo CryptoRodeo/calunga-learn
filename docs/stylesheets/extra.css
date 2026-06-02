@@ -1,0 +1,86 @@
+:root,
+[data-md-color-scheme="slate"] {
+  --md-default-bg-color: #0d1117;
+  --md-default-fg-color: #e6edf3;
+  --md-default-fg-color--light: #8b949e;
+  --md-primary-fg-color: #ee0000;
+  --md-primary-fg-color--light: #ff4444;
+  --md-primary-fg-color--dark: #a30000;
+  --md-accent-fg-color: #009596;
+  --md-code-bg-color: #1c2333;
+  --md-code-fg-color: #e6edf3;
+  --md-typeset-a-color: #009596;
+}
+
+.md-typeset h2 {
+  color: #f0ab00;
+  border-bottom: 2px solid #ee0000;
+  padding-bottom: 8px;
+}
+
+.md-typeset h3 {
+  color: #009596;
+}
+
+.md-sidebar__inner { background: #161b22; }
+
+.md-typeset .admonition,
+.md-typeset details {
+  border-color: #ee0000;
+  background: rgba(238,0,0,0.07);
+}
+
+.md-typeset .admonition.info,
+.md-typeset details.info {
+  border-color: #009596;
+  background: rgba(0,149,150,0.08);
+}
+
+/* Preserved custom components */
+.badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 24px; }
+.badge {
+  background: var(--md-code-bg-color);
+  border: 1px solid #ee0000;
+  border-radius: 16px;
+  padding: 4px 14px;
+  font-size: 0.8rem;
+  color: #f0ab00;
+  font-weight: 600;
+}
+
+.flow-steps { margin: 12px 0; }
+.flow-step {
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px 0; font-size: 0.9rem;
+}
+.flow-step .num {
+  background: #ee0000; color: #fff; border-radius: 50%;
+  width: 28px; height: 28px; display: flex;
+  align-items: center; justify-content: center;
+  font-weight: 700; flex-shrink: 0; font-size: 0.8rem;
+}
+.flow-step .num.teal { background: #009596; }
+
+.security-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+.security-item {
+  display: flex; gap: 12px; padding: 14px;
+  background: var(--md-code-bg-color);
+  border: 1px solid #30363d; border-radius: 8px; font-size: 0.88rem;
+}
+.security-item .icon { font-size: 1.3rem; flex-shrink: 0; }
+.security-item strong { color: #f0ab00; }
+
+.dir-tree {
+  font-family: monospace; font-size: 0.85rem; line-height: 1.6;
+  background: var(--md-code-bg-color); padding: 14px 18px;
+  border-radius: 8px; border: 1px solid #30363d; margin: 10px 0;
+}
+
+.subtitle { color: #8b949e; font-size: 1.1rem; margin-bottom: 20px; }
+
+.glossary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 16px 0; }
+.glossary-card {
+  padding: 12px 16px; background: var(--md-code-bg-color);
+  border: 1px solid #30363d; border-radius: 8px; font-size: 0.88rem;
+}
+.glossary-card strong { color: #f0ab00; display: block; margin-bottom: 4px; }
