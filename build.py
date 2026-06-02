@@ -37,6 +37,28 @@ def mermaid_post_process(html):
     )
 
 
+def inject_heading_anchors(html):
+    """Add clickable # anchor links to headings that have an id attribute."""
+    def add_anchor(match):
+        tag = match.group(1)
+        attrs = match.group(2)
+        content = match.group(3)
+        close_tag = match.group(4)
+        id_match = re.search(r'id="([^"]*)"', attrs)
+        if id_match:
+            anchor_id = id_match.group(1)
+            anchor = f'<a class="heading-anchor" href="#{anchor_id}">#</a>'
+            return f"<{tag}{attrs}>{anchor}{content}</{close_tag}>"
+        return match.group(0)
+
+    return re.sub(
+        r"<(h[1-3])([^>]*)>(.*?)</(h[1-3])>",
+        add_anchor,
+        html,
+        flags=re.DOTALL,
+    )
+
+
 def build():
     sidebar_path = CONTENT_DIR / "_sidebar.yaml"
     sidebar = yaml.safe_load(sidebar_path.read_text())
@@ -52,7 +74,7 @@ def build():
     macro_env = Environment(loader=FileSystemLoader(str(TEMPLATE_DIR)), autoescape=False)
     macros_str = (TEMPLATE_DIR / "macros.html").read_text()
 
-    md = markdown.Markdown(extensions=["fenced_code", "tables", "attr_list", "md_in_html"])
+    md = markdown.Markdown(extensions=["fenced_code", "tables", "attr_list", "md_in_html", "toc"])
 
     section_order = [item["href"] for item in sidebar if "href" in item]
 
@@ -80,11 +102,13 @@ def build():
 
         title_html = ""
         if title:
-            title_html = f"<h2>{title}</h2>\n"
+            title_html = f'<h2 id="{section_id}">{title}</h2>\n'
 
+        full_html = title_html + html
+        full_html = inject_heading_anchors(full_html)
         sections.append({
             "id": section_id,
-            "content": title_html + html,
+            "content": full_html,
         })
 
     base = env.get_template("base.html")
