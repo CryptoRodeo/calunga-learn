@@ -101,7 +101,7 @@ def build():
 
         title_html = ""
         if title:
-            title_html = f'<h2 id="{section_id}">{title}</h2>\n'
+            title_html = f'<h2><a class="heading-anchor" href="#{section_id}">#</a>{title}</h2>\n'
 
         full_html = title_html + html
         full_html = inject_heading_anchors(full_html)
