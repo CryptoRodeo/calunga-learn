@@ -4,7 +4,7 @@ title: Quick Reference
 ---
 
 {{ two_col_start() }}
-<div>
+<div markdown="1">
 
 ### Key Paths (Plumbing)
 
@@ -36,7 +36,7 @@ title: Quick Reference
 </table>
 
 </div>
-<div>
+<div markdown="1">
 
 ### User Configuration
 

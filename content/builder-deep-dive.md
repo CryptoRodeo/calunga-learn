@@ -4,7 +4,7 @@ title: "Builder Image: Source-Built Libraries"
 ---
 
 {{ two_col_start() }}
-<div>
+<div markdown="1">
 <table>
 <thead><tr><th>Library</th><th>Version</th><th>Why</th></tr></thead>
 <tbody>
@@ -24,7 +24,7 @@ title: "Builder Image: Source-Built Libraries"
 </tbody>
 </table>
 </div>
-<div>
+<div markdown="1">
 
 {{ card("Build Details") }}
 

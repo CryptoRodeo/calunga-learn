@@ -56,13 +56,8 @@ h1, h2, h3 { position: relative; }
   color: var(--text-muted);
   text-decoration: none;
   font-weight: 400;
-  opacity: 0;
   margin-right: 0.3em;
-  transition: opacity 0.15s;
 }
-h1:hover .heading-anchor,
-h2:hover .heading-anchor,
-h3:hover .heading-anchor { opacity: 1; }
 .heading-anchor:hover { color: var(--rh-red); }
 
 p { margin-bottom: 12px; color: var(--text); }

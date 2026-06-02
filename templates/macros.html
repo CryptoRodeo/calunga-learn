@@ -49,9 +49,9 @@
 {% endmacro %}
 
 {# ── Glossary tooltip (inline) ── #}
-{% macro glossary(term, definition) %}
+{%- macro glossary(term, definition) -%}
 <span class="glossary-term" tabindex="0">{{ term }}<span class="glossary-tip">{{ definition }}</span></span>
-{% endmacro %}
+{%- endmacro -%}
 
 {# ── Security grid ── #}
 {% macro security_grid_start() %}
