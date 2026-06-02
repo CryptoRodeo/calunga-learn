@@ -43,16 +43,15 @@ def inject_heading_anchors(html):
         tag = match.group(1)
         attrs = match.group(2)
         content = match.group(3)
-        close_tag = match.group(4)
         id_match = re.search(r'id="([^"]*)"', attrs)
-        if id_match:
+        if id_match and id_match.group(1):
             anchor_id = id_match.group(1)
             anchor = f'<a class="heading-anchor" href="#{anchor_id}">#</a>'
-            return f"<{tag}{attrs}>{anchor}{content}</{close_tag}>"
+            return f"<{tag}{attrs}>{anchor}{content}</{tag}>"
         return match.group(0)
 
     return re.sub(
-        r"<(h[1-3])([^>]*)>(.*?)</(h[1-3])>",
+        r"<(h[1-3])([^>]*)>(.*?)</\1>",
         add_anchor,
         html,
         flags=re.DOTALL,
