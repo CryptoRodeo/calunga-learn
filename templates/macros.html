@@ -7,7 +7,7 @@
 
 {# ── Two-column grid ── #}
 {% macro two_col_start() %}
-<div class="two-col">
+<div class="two-col" markdown="1">
 {% endmacro %}
 
 {% macro two_col_end() %}
@@ -16,8 +16,10 @@
 
 {# ── Card ── #}
 {% macro card(title, color="teal") %}
-<div class="card">
+<div class="card" markdown="1">
+
 <h3{% if color == "red" %} style="color:var(--rh-red);"{% elif color == "green" %} style="color:var(--rh-green);"{% endif %}>{{ title }}</h3>
+
 {% endmacro %}
 
 {% macro card_end() %}

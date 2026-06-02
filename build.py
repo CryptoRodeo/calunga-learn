@@ -52,7 +52,7 @@ def build():
     macro_env = Environment(loader=FileSystemLoader(str(TEMPLATE_DIR)), autoescape=False)
     macros_str = (TEMPLATE_DIR / "macros.html").read_text()
 
-    md = markdown.Markdown(extensions=["fenced_code", "tables", "attr_list"])
+    md = markdown.Markdown(extensions=["fenced_code", "tables", "attr_list", "md_in_html"])
 
     section_order = [item["href"] for item in sidebar if "href" in item]
 
