@@ -4,174 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Calunga — Red Hat Trusted Libraries</title>
-<style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --rh-red: #ee0000;
-  --rh-red-dark: #a30000;
-  --rh-teal: #009596;
-  --rh-gold: #f0ab00;
-  --rh-green: #3e8635;
-  --bg: #0d1117;
-  --bg-surface: #161b22;
-  --bg-card: #1c2333;
-  --border: #30363d;
-  --text: #e6edf3;
-  --text-muted: #8b949e;
-  --sidebar-w: 260px;
-}
-
-html { scroll-behavior: smooth; scroll-padding-top: 24px; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
-
-/* Sidebar */
-.sidebar {
-  position: fixed; top: 0; left: 0; width: var(--sidebar-w); height: 100vh;
-  background: var(--bg-surface); border-right: 1px solid var(--border);
-  overflow-y: auto; padding: 20px 0; z-index: 100;
-}
-.sidebar-title {
-  font-size: 1.1rem; font-weight: 700; color: #fff; padding: 0 20px 16px;
-  border-bottom: 1px solid var(--border); margin-bottom: 12px;
-}
-.sidebar-title span { color: var(--rh-red); }
-.sidebar nav a {
-  display: block; padding: 6px 20px; color: var(--text-muted);
-  text-decoration: none; font-size: 0.85rem; transition: all 0.15s;
-  border-left: 3px solid transparent;
-}
-.sidebar nav a:hover { color: #fff; background: rgba(255,255,255,0.04); }
-.sidebar nav a.active { color: var(--rh-gold); border-left-color: var(--rh-red); background: rgba(238,0,0,0.06); }
-.sidebar nav .section-label {
-  font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em;
-  color: var(--text-muted); padding: 14px 20px 4px; font-weight: 600;
-}
-
-/* Main content */
-.main { margin-left: var(--sidebar-w); padding: 32px 48px 80px; max-width: 960px; }
-
-h1 { font-size: 2rem; color: #fff; margin-bottom: 8px; }
-h2 {
-  font-size: 1.5rem; color: var(--rh-gold); margin: 48px 0 16px;
-  padding-bottom: 8px; border-bottom: 2px solid var(--rh-red);
-}
-h3 { font-size: 1.1rem; color: var(--rh-teal); margin: 24px 0 10px; }
-
-p { margin-bottom: 12px; color: var(--text); }
-
-.subtitle { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 20px; }
-
-/* Badges */
-.badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 24px; }
-.badge {
-  background: var(--bg-card); border: 1px solid var(--rh-red); border-radius: 16px;
-  padding: 4px 14px; font-size: 0.8rem; color: var(--rh-gold); font-weight: 600;
-}
-
-/* Cards */
-.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 16px 0; }
-.card {
-  background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px;
-}
-.card h3 { margin-top: 0; }
-
-/* Tables */
-table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 0.9rem; }
-th { background: var(--rh-red-dark); color: #fff; padding: 8px 12px; text-align: left; font-weight: 600; }
-td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
-tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
-
-/* Lists */
-ul, ol { margin: 8px 0 16px 20px; }
-li { margin-bottom: 4px; }
-
-/* Code */
-code { font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace; font-size: 0.88em; background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 4px; }
-pre { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 16px; overflow-x: auto; margin: 12px 0 20px; }
-pre code { background: none; padding: 0; font-size: 0.85rem; }
-
-/* Dir tree */
-.dir-tree { font-family: monospace; font-size: 0.85rem; line-height: 1.6; background: var(--bg-card); padding: 14px 18px; border-radius: 8px; border: 1px solid var(--border); margin: 10px 0; }
-
-/* Callout boxes */
-.callout {
-  background: rgba(238,0,0,0.07); border-left: 4px solid var(--rh-red);
-  padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0; font-size: 0.9rem;
-}
-.callout-teal { background: rgba(0,149,150,0.08); border-left-color: var(--rh-teal); }
-
-/* Flow steps */
-.flow-steps { margin: 12px 0; }
-.flow-step { display: flex; align-items: center; gap: 12px; padding: 8px 0; font-size: 0.9rem; }
-.flow-step .num {
-  background: var(--rh-red); color: #fff; border-radius: 50%;
-  width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
-  font-weight: 700; flex-shrink: 0; font-size: 0.8rem;
-}
-.flow-step .num.teal { background: var(--rh-teal); }
-
-/* Security layers */
-.security-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
-.security-item {
-  display: flex; gap: 12px; padding: 14px; background: var(--bg-card);
-  border: 1px solid var(--border); border-radius: 8px; font-size: 0.88rem;
-}
-.security-item .icon { font-size: 1.3rem; flex-shrink: 0; }
-.security-item strong { color: var(--rh-gold); }
-
-/* Glossary */
-.glossary-term {
-  cursor: help; color: var(--rh-teal); text-decoration: underline;
-  text-decoration-style: dotted; text-underline-offset: 3px;
-  position: relative;
-}
-.glossary-term:hover .glossary-tip,
-.glossary-term:focus .glossary-tip {
-  display: block;
-}
-.glossary-tip {
-  display: none; position: absolute; bottom: 100%; left: 0;
-  background: var(--bg-card); border: 1px solid var(--rh-teal); border-radius: 8px;
-  padding: 10px 14px; width: 320px; font-size: 0.82rem; color: var(--text);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; line-height: 1.5;
-  cursor: default; text-decoration: none;
-}
-
-/* Glossary section */
-.glossary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 16px 0; }
-.glossary-card {
-  padding: 12px 16px; background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: 8px; font-size: 0.88rem;
-}
-.glossary-card strong { color: var(--rh-gold); display: block; margin-bottom: 4px; font-size: 0.95rem; }
-.glossary-card a { color: var(--rh-teal); font-size: 0.8rem; }
-
-/* Mermaid */
-.mermaid { margin: 20px 0; text-align: center; }
-.diagram-wrap { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin: 16px 0; overflow-x: auto; }
-
-/* Scroll spy highlight for sections */
-section[id] { scroll-margin-top: 24px; }
-
-/* Back to top */
-.back-to-top {
-  position: fixed; bottom: 24px; right: 24px; background: var(--rh-red);
-  color: #fff; border: none; border-radius: 50%; width: 40px; height: 40px;
-  cursor: pointer; font-size: 1.2rem; display: none; z-index: 100;
-  align-items: center; justify-content: center;
-}
-.back-to-top.visible { display: flex; }
-
-/* Responsive */
-@media (max-width: 900px) {
-  .sidebar { display: none; }
-  .main { margin-left: 0; padding: 20px; }
-  .two-col { grid-template-columns: 1fr; }
-  .security-grid { grid-template-columns: 1fr; }
-  .glossary-grid { grid-template-columns: 1fr; }
-}
-</style>
+<link rel="stylesheet" href="static/style.css">
 </head>
 <body>
 
@@ -179,210 +12,384 @@ section[id] { scroll-margin-top: 24px; }
 <aside class="sidebar">
   <div class="sidebar-title"><span>Calunga</span> Learn</div>
   <nav>
+    
+    
     <a href="#overview">Overview</a>
+    
+    
+    
     <a href="#why">Why Calunga?</a>
+    
+    
+    
     <a href="#getting-started">Getting Started</a>
+    
+    
+    
     <div class="section-label">Architecture</div>
+    
+    
+    
     <a href="#repos">Two Repos, One System</a>
+    
+    
+    
     <a href="#tech-stack">Technology Stack</a>
+    
+    
+    
     <a href="#e2e-flow">End-to-End Flow</a>
+    
+    
+    
     <div class="section-label">Plumbing</div>
+    
+    
+    
     <a href="#container-images">Container Images</a>
+    
+    
+    
     <a href="#builder-deep-dive">Builder Deep Dive</a>
-    <a href="#scripts-pipelines">Scripts &amp; Pipelines</a>
+    
+    
+    
+    <a href="#scripts-pipelines">Scripts & Pipelines</a>
+    
+    
+    
     <a href="#builder-tests">Builder Tests</a>
+    
+    
+    
     <div class="section-label">Index</div>
+    
+    
+    
     <a href="#package-management">Package Management</a>
+    
+    
+    
     <a href="#version-detection">Version Detection</a>
+    
+    
+    
     <a href="#index-pipeline">Build Pipeline</a>
+    
+    
+    
     <a href="#onboarding">Onboarding Packages</a>
+    
+    
+    
     <div class="section-label">Integration</div>
+    
+    
+    
     <a href="#repos-together">How Repos Connect</a>
+    
+    
+    
     <a href="#integration-testing">Integration Testing</a>
+    
+    
+    
     <a href="#shared-infra">Shared Infrastructure</a>
+    
+    
+    
     <a href="#release-pipeline">Release Pipeline</a>
+    
+    
+    
     <a href="#observability">Observability</a>
-    <div class="section-label">Security &amp; Reference</div>
+    
+    
+    
+    <div class="section-label">Security & Reference</div>
+    
+    
+    
     <a href="#supply-chain">Supply Chain Security</a>
+    
+    
+    
     <a href="#support-matrix">Support Matrix</a>
+    
+    
+    
     <a href="#glossary">Technology Glossary</a>
+    
+    
+    
     <a href="#quick-ref">Quick Reference</a>
+    
+    
   </nav>
 </aside>
 
 <!-- Main content -->
 <main class="main">
 
-<!-- Overview -->
 <section id="overview">
-  <h1>Calunga</h1>
-  <p class="subtitle">Red Hat Trusted Libraries (RHTL) — Secure Python supply chain, from source to <code>pip install</code></p>
-  <div class="badge-row">
-    <span class="badge">1,045+ packages</span>
-    <span class="badge">manylinux_2_28</span>
-    <span class="badge">Python 3.12</span>
-    <span class="badge">SLSA provenance</span>
-    <span class="badge">CycloneDX SBOM</span>
-    <span class="badge">6 security scans</span>
-    <span class="badge">Source-built</span>
-  </div>
-  <p>Calunga is Red Hat's initiative for building, verifying, and distributing secure Python wheels. Two repositories form a complete supply chain pipeline — <strong>plumbing</strong> provides build infrastructure, <strong>index</strong> manages the package catalog and triggers builds.</p>
+<h1>Calunga</h1>
+<p class="subtitle">Red Hat Trusted Libraries (RHTL) — Secure Python supply chain, from source to <code>pip install</code></p>
+
+<div class="badge-row">
+
+<span class="badge">1,045+ packages</span>
+
+<span class="badge">manylinux_2_28</span>
+
+<span class="badge">Python 3.12</span>
+
+<span class="badge">SLSA provenance</span>
+
+<span class="badge">CycloneDX SBOM</span>
+
+<span class="badge">6 security scans</span>
+
+<span class="badge">Source-built</span>
+
+</div>
+
+<p>Calunga is Red Hat's initiative for building, verifying, and distributing secure Python wheels. Two repositories form a complete supply chain pipeline — <strong>plumbing</strong> provides build infrastructure, <strong>index</strong> manages the package catalog and triggers builds.</p>
 </section>
 
-<!-- Why Calunga? -->
 <section id="why">
-  <h2>Why Calunga?</h2>
-  <div class="two-col">
-    <div class="card">
-      <h3 style="color:var(--rh-red);">The Problem</h3>
-      <ul>
-        <li>PyPI wheels are pre-built binaries — you trust the uploader</li>
-        <li>No guarantee of source-to-binary correspondence</li>
-        <li>Supply chain attacks on popular packages (typosquatting, account takeover)</li>
-        <li>No embedded SBOM or provenance metadata</li>
-        <li>Enterprise compliance requires verifiable supply chains</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3 style="color:var(--rh-green);">Calunga's Answer</h3>
-      <ul>
-        <li><strong>Build from source</strong> — 17 C/C++ libs + Python compiled in trusted environments</li>
-        <li><strong>SBOM in every wheel</strong> — <span class="glossary-term" tabindex="0">CycloneDX<span class="glossary-tip">SBOM standard. Fromager generates CycloneDX SBOMs embedded as redhat.spdx.json, listing all components and their provenance.</span></span> <code>redhat.spdx.json</code></li>
-        <li><strong>6 security scans</strong> per build (Clair, Snyk, ClamAV, Coverity, ShellCheck, Unicode)</li>
-        <li><strong><span class="glossary-term" tabindex="0">Enterprise Contract Policy<span class="glossary-tip">Konflux policy framework. Validates that builds meet Red Hat compliance requirements (provenance, signatures, SBOM presence) before allowing releases.</span></span></strong> — Red Hat compliance enforcement</li>
-        <li><strong>Attestation &amp; signing</strong> — <span class="glossary-term" tabindex="0">cosign<span class="glossary-tip">Sigstore tool for signing and verifying container images and artifacts. Used for attestation and provenance in the release pipeline.</span></span> provenance</li>
-        <li><strong>Hermetic builds</strong> — optional zero-network mode</li>
-      </ul>
-    </div>
-  </div>
+<h2>Why Calunga?</h2>
+<div class="two-col">
+
+
+<div class="card">
+<h3 style="color:var(--rh-red);">The Problem</h3>
+
+
+- PyPI wheels are pre-built binaries — you trust the uploader
+- No guarantee of source-to-binary correspondence
+- Supply chain attacks on popular packages (typosquatting, account takeover)
+- No embedded SBOM or provenance metadata
+- Enterprise compliance requires verifiable supply chains
+
+
+</div>
+
+
+<div class="card">
+<h3 style="color:var(--rh-green);">Calunga's Answer</h3>
+
+
+- **Build from source** — 17 C/C++ libs + Python compiled in trusted environments
+- **SBOM in every wheel** — 
+<span class="glossary-term" tabindex="0">CycloneDX<span class="glossary-tip">SBOM standard. Fromager generates CycloneDX SBOMs embedded as redhat.spdx.json, listing all components and their provenance.</span></span>
+ `redhat.spdx.json`
+- **6 security scans** per build (Clair, Snyk, ClamAV, Coverity, ShellCheck, Unicode)
+- **
+<span class="glossary-term" tabindex="0">Enterprise Contract Policy<span class="glossary-tip">Konflux policy framework. Validates that builds meet Red Hat compliance requirements (provenance, signatures, SBOM presence) before allowing releases.</span></span>
+** — Red Hat compliance enforcement
+- **Attestation & signing** — 
+<span class="glossary-term" tabindex="0">cosign<span class="glossary-tip">Sigstore tool for signing and verifying container images and artifacts. Used for attestation and provenance in the release pipeline.</span></span>
+ provenance
+- **Hermetic builds** — optional zero-network mode
+
+
+</div>
+
+
+</div>
 </section>
 
-<!-- Getting Started -->
 <section id="getting-started">
-  <h2>Getting Started</h2>
-  <p>To install wheels from Red Hat Trusted Libraries, you need a <strong>service account</strong> from the
-  <a href="https://access.redhat.com/terms-based-registry/accounts" style="color:var(--rh-teal);">terms-based registry</a>
-  and <strong>Python 3.12</strong> installed on your system.</p>
+<h2>Getting Started</h2>
+<p>To install wheels from Red Hat Trusted Libraries, you need a <strong>service account</strong> from the
+<a href="https://access.redhat.com/terms-based-registry/accounts" style="color:var(--rh-teal);">terms-based registry</a>
+and <strong>Python 3.12</strong> installed on your system.</p>
+<div class="two-col">
 
-  <div class="two-col">
-    <div class="card">
-      <h3>pip Configuration</h3>
-      <pre><code># pip.conf (venv/, ~/.config/pip/, or /etc/pip.conf)
+
+<div class="card">
+<h3>pip Configuration</h3>
+
+
+
+<pre><code># pip.conf (venv/, ~/.config/pip/, or /etc/pip.conf)
 [global]
-index-url = https://&lt;username&gt;:&lt;password&gt;@packages.redhat.com/trusted-libraries/python/</code></pre>
-      <pre><code># Install packages
+index-url = https://&lt;username&gt;:&lt;password&gt;@packages.redhat.com/trusted-libraries/python/
+</code></pre>
+
+
+
+<pre><code># Install packages
 python3.12 -m venv venv &amp;&amp; source venv/bin/activate
 pip install numpy
-pip install --only-binary=:all: -r requirements.txt</code></pre>
-    </div>
-    <div class="card">
-      <h3>uv Configuration</h3>
-      <pre><code># pyproject.toml
+pip install --only-binary=:all: -r requirements.txt
+</code></pre>
+
+
+
+</div>
+
+
+<div class="card">
+<h3>uv Configuration</h3>
+
+
+
+<pre><code># pyproject.toml
 [[tool.uv.index]]
-name = "trusted-libraries"
-url = "https://packages.redhat.com/trusted-libraries/python"
-default = true</code></pre>
-      <pre><code># Export credentials
+name = &quot;trusted-libraries&quot;
+url = &quot;https://packages.redhat.com/trusted-libraries/python&quot;
+default = true
+</code></pre>
+
+
+
+<pre><code># Export credentials
 export UV_INDEX_INTERNAL_PROXY_USERNAME=&lt;username&gt;
-export UV_INDEX_INTERNAL_PROXY_PASSWORD=&lt;password&gt;</code></pre>
-    </div>
-  </div>
+export UV_INDEX_INTERNAL_PROXY_PASSWORD=&lt;password&gt;
+</code></pre>
 
-  <h3>Viewing SBOMs</h3>
-  <p>Every wheel contains an SBOM at <code>&lt;package&gt;.dist-info/sboms/redhat.spdx.json</code>:</p>
-  <pre><code>pip download numpy==2.3.3
+
+
+</div>
+
+
+</div>
+
+<h3>Viewing SBOMs</h3>
+<p>Every wheel contains an SBOM at <code>&lt;package&gt;.dist-info/sboms/redhat.spdx.json</code>:</p>
+<pre><code>pip download numpy==2.3.3
 unzip numpy-2.3.3-0-cp312-cp312-manylinux_2_28_x86_64.whl -d extracted
-cat extracted/numpy-2.3.3.dist-info/sboms/redhat.spdx.json</code></pre>
-
-  <div class="callout-teal callout">
-    <strong>Provenance verification:</strong> Attestations can be verified using cosign. See
-    <a href="https://github.com/redhat-tssc-tmm/trusted-libraries/tree/main/blog/scripts" style="color:var(--rh-teal);">verification scripts</a>
-    for examples.
-  </div>
+cat extracted/numpy-2.3.3.dist-info/sboms/redhat.spdx.json
+</code></pre>
+<div class="callout callout-teal">
+<strong>Provenance verification:</strong> Attestations can be verified using cosign. See <a href='https://github.com/redhat-tssc-tmm/trusted-libraries/tree/main/blog/scripts' style='color:var(--rh-teal);'>verification scripts</a> for examples.
+</div>
 </section>
 
-<!-- Two Repos -->
 <section id="repos">
-  <h2>Two Repos, One System</h2>
-  <div class="two-col">
-    <div class="card">
-      <h3>calunga-project-plumbing</h3>
-      <p style="color:var(--rh-teal); font-size:0.9rem;">Build Infrastructure</p>
-      <ul>
-        <li>Container images (builder, utils)</li>
-        <li><span class="glossary-term" tabindex="0">Tekton<span class="glossary-tip">Kubernetes-native CI/CD framework. Pipelines defined as YAML CRDs (Tasks, Pipelines, PipelineRuns). Each step runs in its own container. Used here via Konflux.</span></span> tasks &amp; pipelines</li>
-        <li>Build scripts (<span class="glossary-term" tabindex="0">Fromager<span class="glossary-tip">Python wheel build orchestrator. Resolves full dependency graph from source distributions, builds each package in order, and embeds CycloneDX SBOMs. Ensures wheels are built from source — not downloaded pre-built from PyPI.</span></span>, <span class="glossary-term" tabindex="0">auditwheel<span class="glossary-tip">Post-build compliance tool. Inspects Linux wheels for shared library dependencies, bundles required .so files into the wheel, and relabels it with the correct manylinux platform tag.</span></span>)</li>
-        <li>SBOM patching &amp; artifact collection</li>
-      </ul>
-      <div class="dir-tree">
-builder/<br>
-├── Containerfile &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Multi-stage builder image<br>
-├── build_scripts/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 43 build &amp; install scripts<br>
-├── scripts/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# build-wheels entry point<br>
-└── tests/<br>
-tasks/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Tekton bundles<br>
-pipelines/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# integration tests
-      </div>
-    </div>
-    <div class="card">
-      <h3>calunga-project-index</h3>
-      <p style="color:var(--rh-teal); font-size:0.9rem;">Package Registry</p>
-      <ul>
-        <li>1,045 onboarded package JSONs</li>
-        <li>Version detection (12h cron)</li>
-        <li>Auto-PR creation &amp; merge</li>
-        <li><span class="glossary-term" tabindex="0">Konflux<span class="glossary-tip">Red Hat's enterprise CI/CD platform built on Tekton. Adds Enterprise Contract Policy enforcement, release management, nudge-based auto-updates, and OCI Trusted Artifacts for secure data passing between tasks.</span></span> release pipeline</li>
-      </ul>
-      <div class="dir-tree">
-onboarded_packages/<br>
-├── numpy.json<br>
-├── requests.json<br>
-└── ... (1,045 files)<br>
-hack/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# check-for-updates.py<br>
-.tekton/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# build-pipeline.yaml
-      </div>
-    </div>
-  </div>
-  <div class="callout">
-    <strong>plumbing</strong> builds the tools &rarr; <strong>index</strong> uses them to build wheels &rarr; wheels published to <strong>packages.redhat.com</strong>
-  </div>
+<h2>Two Repos, One System</h2>
+<div class="two-col">
+
+
+<div class="card">
+<h3>calunga-project-plumbing</h3>
+
+
+<p style="color:var(--rh-teal); font-size:0.9rem;">Build Infrastructure</p>
+
+- Container images (builder, utils)
+- 
+<span class="glossary-term" tabindex="0">Tekton<span class="glossary-tip">Kubernetes-native CI/CD framework. Pipelines defined as YAML CRDs (Tasks, Pipelines, PipelineRuns). Each step runs in its own container. Used here via Konflux.</span></span>
+ tasks & pipelines
+- Build scripts (
+<span class="glossary-term" tabindex="0">Fromager<span class="glossary-tip">Python wheel build orchestrator. Resolves full dependency graph from source distributions, builds each package in order, and embeds CycloneDX SBOMs. Ensures wheels are built from source — not downloaded pre-built from PyPI.</span></span>
+, 
+<span class="glossary-term" tabindex="0">auditwheel<span class="glossary-tip">Post-build compliance tool. Inspects Linux wheels for shared library dependencies, bundles required .so files into the wheel, and relabels it with the correct manylinux platform tag.</span></span>
+)
+- SBOM patching & artifact collection
+
+
+<div class="dir-tree">
+builder/<br>├── Containerfile &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Multi-stage builder image<br>├── build_scripts/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 43 build &amp; install scripts<br>├── scripts/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# build-wheels entry point<br>└── tests/<br>tasks/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Tekton bundles<br>pipelines/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# integration tests
+</div>
+
+
+
+</div>
+
+
+<div class="card">
+<h3>calunga-project-index</h3>
+
+
+<p style="color:var(--rh-teal); font-size:0.9rem;">Package Registry</p>
+
+- 1,045 onboarded package JSONs
+- Version detection (12h cron)
+- Auto-PR creation & merge
+- 
+<span class="glossary-term" tabindex="0">Konflux<span class="glossary-tip">Red Hat's enterprise CI/CD platform built on Tekton. Adds Enterprise Contract Policy enforcement, release management, nudge-based auto-updates, and OCI Trusted Artifacts for secure data passing between tasks.</span></span>
+ release pipeline
+
+
+<div class="dir-tree">
+onboarded_packages/<br>├── numpy.json<br>├── requests.json<br>└── ... (1,045 files)<br>hack/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# check-for-updates.py<br>.tekton/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# build-pipeline.yaml
+</div>
+
+
+
+</div>
+
+
+</div>
+
+<div class="callout">
+<strong>plumbing</strong> builds the tools &rarr; <strong>index</strong> uses them to build wheels &rarr; wheels published to <strong>packages.redhat.com</strong>
+</div>
 </section>
 
-<!-- Tech Stack -->
 <section id="tech-stack">
-  <h2>Technology Stack</h2>
-  <table>
-    <thead><tr><th>Layer</th><th>Technology</th><th>Role</th></tr></thead>
-    <tbody>
-      <tr><td><strong>Languages</strong></td><td>Bash, Python 3.12, YAML</td><td>Scripts, automation, pipeline definitions</td></tr>
-      <tr><td><strong>Container Base</strong></td><td><span class="glossary-term" tabindex="0">UBI8<span class="glossary-tip">Universal Base Image. Red Hat's freely redistributable, minimal container base image. UBI8 provides a RHEL 8 userspace for the builder image.</span></span> (builder), UBI10 (utils/index)</td><td>Red Hat Universal Base Images</td></tr>
-      <tr><td><strong>CI/CD</strong></td><td><span class="glossary-term" tabindex="0">Tekton<span class="glossary-tip">Kubernetes-native CI/CD framework. Pipelines defined as YAML CRDs (Tasks, Pipelines, PipelineRuns). Each step runs in its own container.</span></span> + <span class="glossary-term" tabindex="0">Konflux<span class="glossary-tip">Red Hat's enterprise CI/CD platform built on Tekton. Adds Enterprise Contract Policy enforcement, release management, nudge-based auto-updates, and OCI Trusted Artifacts.</span></span></td><td>Kubernetes-native pipelines with enterprise features</td></tr>
-      <tr><td><strong>Container Build</strong></td><td><span class="glossary-term" tabindex="0">Buildah<span class="glossary-tip">Daemonless container image builder. Builds OCI/Docker images from Containerfiles without requiring a Docker daemon. Used by Tekton tasks to produce the builder and utils images.</span></span></td><td>Daemonless OCI image builder</td></tr>
-      <tr><td><strong>Wheel Builder</strong></td><td><span class="glossary-term" tabindex="0">Fromager<span class="glossary-tip">Python wheel build orchestrator. Resolves full dependency graph from source distributions, builds each package in order, and embeds CycloneDX SBOMs.</span></span> (&ge;0.81.0)</td><td>Source-only wheel build orchestrator</td></tr>
-      <tr><td><strong>Compliance</strong></td><td><span class="glossary-term" tabindex="0">auditwheel<span class="glossary-tip">Post-build compliance tool. Inspects Linux wheels for shared library dependencies, bundles required .so files, and relabels with the correct manylinux platform tag.</span></span></td><td><span class="glossary-term" tabindex="0">manylinux<span class="glossary-tip">PEP-defined platform compatibility standard for Linux Python wheels. Specifies maximum glibc version and allowed shared library dependencies. manylinux_2_28 targets glibc 2.28+ (RHEL 8+).</span></span> repair &amp; .so bundling</td></tr>
-      <tr><td><strong>Security</strong></td><td>Clair, Snyk, ClamAV, Coverity, ShellCheck</td><td>6 scan types per build</td></tr>
-      <tr><td><strong>SBOM</strong></td><td><span class="glossary-term" tabindex="0">CycloneDX / SPDX<span class="glossary-tip">SBOM standards. Fromager generates CycloneDX SBOMs embedded in each wheel as redhat.spdx.json, listing all components and their provenance.</span></span></td><td>Software Bill of Materials in every wheel</td></tr>
-      <tr><td><strong>Registries</strong></td><td>Quay.io, packages.redhat.com</td><td>Images &amp; wheels</td></tr>
-      <tr><td><strong>Automation</strong></td><td>GitHub Actions, <span class="glossary-term" tabindex="0">Nudge<span class="glossary-tip">Konflux auto-update mechanism. When plumbing publishes a new image or task bundle digest, nudge creates PRs in downstream repos to update pinned SHA256 references.</span></span></td><td>Version detection &amp; dependency updates</td></tr>
-      <tr><td><strong>Compilers</strong></td><td><span class="glossary-term" tabindex="0">gcc-toolset-14<span class="glossary-tip">Red Hat's SCL-packaged GCC 14 compiler suite for UBI8/RHEL 8. Provides modern C/C++ compilation without replacing system GCC.</span></span>, clang 21.1.5, Rust 1.95.0</td><td>Native extension compilation</td></tr>
-    </tbody>
-  </table>
+<h2>Technology Stack</h2>
+<table>
+<thead><tr><th>Layer</th><th>Technology</th><th>Role</th></tr></thead>
+<tbody>
+  <tr><td><strong>Languages</strong></td><td>Bash, Python 3.12, YAML</td><td>Scripts, automation, pipeline definitions</td></tr>
+  <tr><td><strong>Container Base</strong></td><td>
+<span class="glossary-term" tabindex="0">UBI8<span class="glossary-tip">Universal Base Image. Red Hat's freely redistributable, minimal container base image. UBI8 provides a RHEL 8 userspace for the builder image.</span></span>
+ (builder), UBI10 (utils/index)</td><td>Red Hat Universal Base Images</td></tr>
+  <tr><td><strong>CI/CD</strong></td><td>
+<span class="glossary-term" tabindex="0">Tekton<span class="glossary-tip">Kubernetes-native CI/CD framework. Pipelines defined as YAML CRDs (Tasks, Pipelines, PipelineRuns). Each step runs in its own container.</span></span>
+ + 
+<span class="glossary-term" tabindex="0">Konflux<span class="glossary-tip">Red Hat's enterprise CI/CD platform built on Tekton. Adds Enterprise Contract Policy enforcement, release management, nudge-based auto-updates, and OCI Trusted Artifacts.</span></span>
+</td><td>Kubernetes-native pipelines with enterprise features</td></tr>
+  <tr><td><strong>Container Build</strong></td><td>
+<span class="glossary-term" tabindex="0">Buildah<span class="glossary-tip">Daemonless container image builder. Builds OCI/Docker images from Containerfiles without requiring a Docker daemon. Used by Tekton tasks to produce the builder and utils images.</span></span>
+</td><td>Daemonless OCI image builder</td></tr>
+  <tr><td><strong>Wheel Builder</strong></td><td>
+<span class="glossary-term" tabindex="0">Fromager<span class="glossary-tip">Python wheel build orchestrator. Resolves full dependency graph from source distributions, builds each package in order, and embeds CycloneDX SBOMs.</span></span>
+ (&ge;0.81.0)</td><td>Source-only wheel build orchestrator</td></tr>
+  <tr><td><strong>Compliance</strong></td><td>
+<span class="glossary-term" tabindex="0">auditwheel<span class="glossary-tip">Post-build compliance tool. Inspects Linux wheels for shared library dependencies, bundles required .so files, and relabels with the correct manylinux platform tag.</span></span>
+</td><td>
+<span class="glossary-term" tabindex="0">manylinux<span class="glossary-tip">PEP-defined platform compatibility standard for Linux Python wheels. Specifies maximum glibc version and allowed shared library dependencies. manylinux_2_28 targets glibc 2.28+ (RHEL 8+).</span></span>
+ repair & .so bundling</td></tr>
+  <tr><td><strong>Security</strong></td><td>Clair, Snyk, ClamAV, Coverity, ShellCheck</td><td>6 scan types per build</td></tr>
+  <tr><td><strong>SBOM</strong></td><td>
+<span class="glossary-term" tabindex="0">CycloneDX / SPDX<span class="glossary-tip">SBOM standards. Fromager generates CycloneDX SBOMs embedded in each wheel as redhat.spdx.json, listing all components and their provenance.</span></span>
+</td><td>Software Bill of Materials in every wheel</td></tr>
+  <tr><td><strong>Registries</strong></td><td>Quay.io, packages.redhat.com</td><td>Images & wheels</td></tr>
+  <tr><td><strong>Automation</strong></td><td>GitHub Actions, 
+<span class="glossary-term" tabindex="0">Nudge<span class="glossary-tip">Konflux auto-update mechanism. When plumbing publishes a new image or task bundle digest, nudge creates PRs in downstream repos to update pinned SHA256 references.</span></span>
+</td><td>Version detection & dependency updates</td></tr>
+  <tr><td><strong>Compilers</strong></td><td>
+<span class="glossary-term" tabindex="0">gcc-toolset-14<span class="glossary-tip">Red Hat's SCL-packaged GCC 14 compiler suite for UBI8/RHEL 8. Provides modern C/C++ compilation without replacing system GCC.</span></span>
+, clang 21.1.5, Rust 1.95.0</td><td>Native extension compilation</td></tr>
+</tbody>
+</table>
 </section>
 
-<!-- End-to-End Flow -->
 <section id="e2e-flow">
-  <h2>End-to-End Flow</h2>
-  <div class="diagram-wrap">
-    <div class="mermaid">
+<h2>End-to-End Flow</h2>
+<div class="diagram-wrap">
+<div class="mermaid">
 flowchart TD
-    PyPI[(PyPI)] --> Cron["check-for-updates.py\n(12h cron)"]
+    PyPI[(PyPI)] --> Cron["check-for-updates.py
+(12h cron)"]
     Pulp[(Red Hat Pulp)] --> Cron
-    Cron --> PRs["Auto-create PRs\n(one per package)"]
-    PRs -->|auto-merge| Build["build-python-wheels\n(Fromager + auditwheel)"]
-    Build --> Scan["Security Scans\nClair | Snyk | ClamAV\nCoverity | ShellCheck"]
-    Scan --> ECP["Enterprise Contract\nPolicy check"]
-    ECP --> Sign["Attestation\n(cosign signing)"]
-    Sign --> Release["Auto-release\n(7-day grace)"]
+    Cron --> PRs["Auto-create PRs
+(one per package)"]
+    PRs -->|auto-merge| Build["build-python-wheels
+(Fromager + auditwheel)"]
+    Build --> Scan["Security Scans
+Clair | Snyk | ClamAV
+Coverity | ShellCheck"]
+    Scan --> ECP["Enterprise Contract
+Policy check"]
+    ECP --> Sign["Attestation
+(cosign signing)"]
+    Sign --> Release["Auto-release
+(7-day grace)"]
     Release --> Registry["packages.redhat.com"]
     Registry --> Users["pip install / uv"]
 
@@ -392,15 +399,14 @@ flowchart TD
     style Users fill:#2e7d32,color:#fff
     style Scan fill:#c62828,color:#fff
     style ECP fill:#c62828,color:#fff
-    </div>
-  </div>
+</div>
+</div>
 </section>
 
-<!-- Container Images -->
 <section id="container-images">
-  <h2>Plumbing: Container Images</h2>
-  <div class="diagram-wrap">
-    <div class="mermaid">
+<h2>Plumbing: Container Images</h2>
+<div class="diagram-wrap">
+<div class="mermaid">
 graph TD
     subgraph builder["plumbing-builder (UBI8)"]
         UBI8["UBI8 base"] --> Libs["17 source-built C/C++ libs"]
@@ -412,166 +418,215 @@ graph TD
         Twine["Twine upload"] ~~~ PEP740["convert-dsse-to-pep740.py"]
     end
     subgraph bundle["task-build-python-wheels"]
-        OCI["Tekton Bundle\n(OCI artifact)"]
+        OCI["Tekton Bundle
+(OCI artifact)"]
     end
     builder -.->|runs inside| bundle
 
     style builder fill:#1a237e,color:#fff
     style utils fill:#004d40,color:#fff
     style bundle fill:#bf360c,color:#fff
-    </div>
-  </div>
-  <div class="callout">
-    <strong>~2,000-line Containerfile</strong> with 20+ intermediate stages. Builder image compiles everything from source for full supply chain control.
-  </div>
+</div>
+</div>
+
+<div class="callout">
+<strong>~2,000-line Containerfile</strong> with 20+ intermediate stages. Builder image compiles everything from source for full supply chain control.
+</div>
 </section>
 
-<!-- Builder Deep Dive -->
 <section id="builder-deep-dive">
-  <h2>Builder Image: Source-Built Libraries</h2>
-  <div class="two-col">
-    <div>
-      <table>
-        <thead><tr><th>Library</th><th>Version</th><th>Why</th></tr></thead>
-        <tbody>
-          <tr><td>OpenSSL</td><td>3.5.4</td><td>TLS, cryptography wheels</td></tr>
-          <tr><td>curl</td><td>8.17.0</td><td>HTTP client for downloads</td></tr>
-          <tr><td>git</td><td>2.51.2</td><td>Source fetching</td></tr>
-          <tr><td>SQLite</td><td>3.51.0</td><td>Python stdlib module</td></tr>
-          <tr><td>OpenBLAS</td><td>latest</td><td>NumPy/SciPy linear algebra</td></tr>
-          <tr><td>libjpeg-turbo</td><td>latest</td><td>Pillow image processing</td></tr>
-          <tr><td>libxml2 / libxslt</td><td>latest</td><td>lxml XML parsing</td></tr>
-          <tr><td>libyaml</td><td>latest</td><td>PyYAML C extension</td></tr>
-          <tr><td>zlib / bzip2 / zstd</td><td>latest</td><td>Compression</td></tr>
-          <tr><td>libffi</td><td>latest</td><td>ctypes / cffi</td></tr>
-          <tr><td>mpdecimal</td><td>latest</td><td>Python decimal module</td></tr>
-          <tr><td>libomp</td><td>latest</td><td>OpenMP parallelism</td></tr>
-          <tr><td>libpng / libtiff</td><td>latest</td><td>Image format support</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div>
-      <div class="card">
-        <h3>Build Details</h3>
-        <ul>
-          <li><strong>Base:</strong> UBI8 (RHEL 8 userspace)</li>
-          <li><strong>Python:</strong> CPython 3.12.12 from source</li>
-          <li><strong>Alt runtime:</strong> PyPy 3.11</li>
-          <li><strong>Alt runtime:</strong> GraalPy 3.11 / 3.12</li>
-          <li><strong>C/C++:</strong> gcc-toolset-14</li>
-          <li><strong>C/C++ (static):</strong> clang 21.1.5</li>
-          <li><strong>Rust:</strong> 1.95.0</li>
-          <li><strong>Deps:</strong> <span class="glossary-term" tabindex="0">pip-compile<span class="glossary-tip">Dependency resolver from pip-tools. Generates fully pinned requirements.txt with SHA256 hashes from a loose requirements.in, ensuring reproducible installs.</span></span> --require-hashes</li>
-        </ul>
-      </div>
-      <div class="card" style="margin-top:12px;">
-        <h3>Key Tools</h3>
-        <ul>
-          <li><strong><span class="glossary-term" tabindex="0">Fromager<span class="glossary-tip">Python wheel build orchestrator. Resolves full dependency graph from source distributions, builds each package in order, and embeds CycloneDX SBOMs.</span></span></strong> — orchestrates full dep graph builds</li>
-          <li><strong><span class="glossary-term" tabindex="0">auditwheel<span class="glossary-tip">Post-build compliance tool. Inspects Linux wheels for shared library deps, bundles required .so files, relabels with correct manylinux platform tag.</span></span></strong> — bundles .so, sets manylinux tag</li>
-          <li><strong>pip-compile</strong> — hash-pinned requirements</li>
-        </ul>
-      </div>
-    </div>
-  </div>
+<h2>Builder Image: Source-Built Libraries</h2>
+<div class="two-col">
+
+<div>
+<table>
+<thead><tr><th>Library</th><th>Version</th><th>Why</th></tr></thead>
+<tbody>
+  <tr><td>OpenSSL</td><td>3.5.4</td><td>TLS, cryptography wheels</td></tr>
+  <tr><td>curl</td><td>8.17.0</td><td>HTTP client for downloads</td></tr>
+  <tr><td>git</td><td>2.51.2</td><td>Source fetching</td></tr>
+  <tr><td>SQLite</td><td>3.51.0</td><td>Python stdlib module</td></tr>
+  <tr><td>OpenBLAS</td><td>latest</td><td>NumPy/SciPy linear algebra</td></tr>
+  <tr><td>libjpeg-turbo</td><td>latest</td><td>Pillow image processing</td></tr>
+  <tr><td>libxml2 / libxslt</td><td>latest</td><td>lxml XML parsing</td></tr>
+  <tr><td>libyaml</td><td>latest</td><td>PyYAML C extension</td></tr>
+  <tr><td>zlib / bzip2 / zstd</td><td>latest</td><td>Compression</td></tr>
+  <tr><td>libffi</td><td>latest</td><td>ctypes / cffi</td></tr>
+  <tr><td>mpdecimal</td><td>latest</td><td>Python decimal module</td></tr>
+  <tr><td>libomp</td><td>latest</td><td>OpenMP parallelism</td></tr>
+  <tr><td>libpng / libtiff</td><td>latest</td><td>Image format support</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+
+
+<div class="card">
+<h3>Build Details</h3>
+
+
+- **Base:** UBI8 (RHEL 8 userspace)
+- **Python:** CPython 3.12.12 from source
+- **Alt runtime:** PyPy 3.11
+- **Alt runtime:** GraalPy 3.11 / 3.12
+- **C/C++:** gcc-toolset-14
+- **C/C++ (static):** clang 21.1.5
+- **Rust:** 1.95.0
+- **Deps:** 
+<span class="glossary-term" tabindex="0">pip-compile<span class="glossary-tip">Dependency resolver from pip-tools. Generates fully pinned requirements.txt with SHA256 hashes from a loose requirements.in, ensuring reproducible installs.</span></span>
+ --require-hashes
+
+
+</div>
+
+
+
+<div class="card">
+<h3>Key Tools</h3>
+
+
+- **
+<span class="glossary-term" tabindex="0">Fromager<span class="glossary-tip">Python wheel build orchestrator. Resolves full dependency graph from source distributions, builds each package in order, and embeds CycloneDX SBOMs.</span></span>
+** — orchestrates full dep graph builds
+- **
+<span class="glossary-term" tabindex="0">auditwheel<span class="glossary-tip">Post-build compliance tool. Inspects Linux wheels for shared library deps, bundles required .so files, relabels with correct manylinux platform tag.</span></span>
+** — bundles .so, sets manylinux tag
+- **pip-compile** — hash-pinned requirements
+
+
+</div>
+
+</div>
+
+</div>
 </section>
 
-<!-- Scripts & Pipelines -->
 <section id="scripts-pipelines">
-  <h2>Key Scripts &amp; Tekton Pipelines</h2>
+<h2>Key Scripts & Tekton Pipelines</h2>
+<h3>Scripts</h3>
+<table>
+<thead><tr><th>Script</th><th>Purpose</th></tr></thead>
+<tbody>
+  <tr><td><code>build-wheels</code></td><td>Main entry point: Fromager resolve &rarr; build &rarr; auditwheel &rarr; SBOM patch</td></tr>
+  <tr><td><code>collect-build-files</code></td><td>Gathers SBOM + build artifacts from completed builds</td></tr>
+  <tr><td><code>patch-sbom-purl</code></td><td>Adds file_name qualifier to PURLs, renames SBOM to <code>redhat.spdx.json</code></td></tr>
+  <tr><td><code>check-for-updates.py</code></td><td>Async PyPI/Pulp version checker (index repo)</td></tr>
+  <tr><td><code>identify-packages</code></td><td>Detects which package JSONs changed in PR</td></tr>
+</tbody>
+</table>
 
-  <h3>Scripts</h3>
-  <table>
-    <thead><tr><th>Script</th><th>Purpose</th></tr></thead>
-    <tbody>
-      <tr><td><code>build-wheels</code></td><td>Main entry point: Fromager resolve &rarr; build &rarr; auditwheel &rarr; SBOM patch</td></tr>
-      <tr><td><code>collect-build-files</code></td><td>Gathers SBOM + build artifacts from completed builds</td></tr>
-      <tr><td><code>patch-sbom-purl</code></td><td>Adds file_name qualifier to PURLs, renames SBOM to <code>redhat.spdx.json</code></td></tr>
-      <tr><td><code>check-for-updates.py</code></td><td>Async PyPI/Pulp version checker (index repo)</td></tr>
-      <tr><td><code>identify-packages</code></td><td>Detects which package JSONs changed in PR</td></tr>
-    </tbody>
-  </table>
-
-  <h3>Build Pipeline (17 tasks)</h3>
-  <div class="diagram-wrap">
-    <div class="mermaid">
+<h3>Build Pipeline (17 tasks)</h3>
+<div class="diagram-wrap">
+<div class="mermaid">
 flowchart LR
     init --> clone
     clone --> prefetch
     prefetch --> build["build-container"]
     build --> idx["build-image-index"]
-    idx --> scans["Scans (parallel):\nClair | Snyk | Coverity\nShellCheck | Unicode\nClamAV | RPM sig"]
+    idx --> scans["Scans (parallel):
+Clair | Snyk | Coverity
+ShellCheck | Unicode
+ClamAV | RPM sig"]
     scans --> tags["apply-tags"]
     tags --> push["push-dockerfile"]
     push --> summary
-    </div>
-  </div>
+</div>
+</div>
 
-  <div class="callout">
-    <strong>Tekton Pipelines:</strong>
-    Builder = 8 CPU, 12GB RAM, 3h timeout &nbsp;|&nbsp;
-    Utils = defaults, 1h timeout &nbsp;|&nbsp;
-    Task bundle = defaults
-  </div>
+<div class="callout">
+<strong>Tekton Pipelines:</strong> Builder = 8 CPU, 12GB RAM, 3h timeout &nbsp;|&nbsp; Utils = defaults, 1h timeout &nbsp;|&nbsp; Task bundle = defaults
+</div>
 </section>
 
-<!-- Builder Self-Tests -->
 <section id="builder-tests">
-  <h2>Builder Image: Self-Tests</h2>
-  <p>The builder image runs a comprehensive test suite (<code>builder/tests/run_tests.sh</code>) to validate every component before any wheel build occurs.</p>
+<h2>Builder Image: Self-Tests</h2>
+<p>The builder image runs a comprehensive test suite (<code>builder/tests/run_tests.sh</code>) to validate every component before any wheel build occurs.</p>
+<div class="security-grid">
 
-  <div class="security-grid">
-    <div class="security-item"><span class="icon">&#x1f40d;</span><div><strong>Interpreter Count</strong><br>Verifies expected number of Python installations (CPython, PyPy, GraalPy) are present and functional.</div></div>
-    <div class="security-item"><span class="icon">&#x1f512;</span><div><strong>SSL Validation</strong><br>Every interpreter tested for correct OpenSSL configuration and cert verification.</div></div>
-    <div class="security-item"><span class="icon">&#x1f4e6;</span><div><strong>Module Check</strong><br>CPython optional modules (sqlite3, ssl, ctypes, decimal, etc.) verified loadable.</div></div>
-    <div class="security-item"><span class="icon">&#x2699;&#xfe0f;</span><div><strong>Wheel Build + Repair</strong><br>C extension project (<code>forty-two</code>) built, repaired with auditwheel, installed and executed per interpreter.</div></div>
-    <div class="security-item"><span class="icon">&#x1f50d;</span><div><strong>Library Discovery</strong><br>Source-built libs verified via <code>pkg-config</code> and <code>ldconfig</code> (libjpeg, libyaml, libxml2, etc.).</div></div>
-    <div class="security-item"><span class="icon">&#x1f3d7;&#xfe0f;</span><div><strong>Compile Tests</strong><br>Autotools and CMake projects compiled against installed headers and libraries (SQLite, C++).</div></div>
-    <div class="security-item"><span class="icon">&#x1f6e0;&#xfe0f;</span><div><strong>Tool Presence</strong><br>auditwheel, autoconf, automake, libtool, patchelf, git, git-lfs, cmake, swig, nox all verified.</div></div>
-    <div class="security-item"><span class="icon">&#x1f4bb;</span><div><strong>uv Integration</strong><br>Wheels installed via both pip and uv to verify compatibility with modern tooling.</div></div>
-  </div>
 
-  <div class="callout-teal callout">
-    Tests run on every PR via GitHub Actions. Path filtering skips the full build when only non-builder files change.
-  </div>
+<div class="security-item"><span class="icon">&#x1f40d;</span><div><strong>Interpreter Count</strong><br>Verifies expected number of Python installations (CPython, PyPy, GraalPy) are present and functional.</div></div>
+
+
+<div class="security-item"><span class="icon">&#x1f512;</span><div><strong>SSL Validation</strong><br>Every interpreter tested for correct OpenSSL configuration and cert verification.</div></div>
+
+
+<div class="security-item"><span class="icon">&#x1f4e6;</span><div><strong>Module Check</strong><br>CPython optional modules (sqlite3, ssl, ctypes, decimal, etc.) verified loadable.</div></div>
+
+
+<div class="security-item"><span class="icon">&#x2699;&#xfe0f;</span><div><strong>Wheel Build + Repair</strong><br>C extension project (<code>forty-two</code>) built, repaired with auditwheel, installed and executed per interpreter.</div></div>
+
+
+<div class="security-item"><span class="icon">&#x1f50d;</span><div><strong>Library Discovery</strong><br>Source-built libs verified via <code>pkg-config</code> and <code>ldconfig</code> (libjpeg, libyaml, libxml2, etc.).</div></div>
+
+
+<div class="security-item"><span class="icon">&#x1f3d7;&#xfe0f;</span><div><strong>Compile Tests</strong><br>Autotools and CMake projects compiled against installed headers and libraries (SQLite, C++).</div></div>
+
+
+<div class="security-item"><span class="icon">&#x1f6e0;&#xfe0f;</span><div><strong>Tool Presence</strong><br>auditwheel, autoconf, automake, libtool, patchelf, git, git-lfs, cmake, swig, nox all verified.</div></div>
+
+
+<div class="security-item"><span class="icon">&#x1f4bb;</span><div><strong>uv Integration</strong><br>Wheels installed via both pip and uv to verify compatibility with modern tooling.</div></div>
+
+
+</div>
+
+<div class="callout callout-teal">
+Tests run on every PR via GitHub Actions. Path filtering skips the full build when only non-builder files change.
+</div>
 </section>
 
-<!-- Package Management -->
 <section id="package-management">
-  <h2>Index: Package Management</h2>
+<h2>Index: Package Management</h2>
+<h3>1,045 Onboarded Packages</h3>
+<p>Each package has a JSON file in <code>onboarded_packages/</code>:</p>
+<pre><code class="language-json">{
+  &quot;version&quot;: &quot;2.4.6&quot;,
+  &quot;ignored_versions&quot;: [&quot;0.9.6&quot;, &quot;0.9.8&quot;, &quot;2.4.3&quot;]
+}
+</code></pre>
+<ul>
+<li><code>version</code> — current target version to build</li>
+<li><code>ignored_versions</code> — unsupported, vulnerable, or skipped releases</li>
+</ul>
+<div class="callout callout-teal">
+One JSON file = one Python package. Simple contract between version detection and build pipeline.
+</div>
 
-  <h3>1,045 Onboarded Packages</h3>
-  <p>Each package has a JSON file in <code>onboarded_packages/</code>:</p>
-  <pre><code>{
-  "version": "2.4.6",
-  "ignored_versions": ["0.9.6", "0.9.8", "2.4.3"]
-}</code></pre>
-  <ul>
-    <li><code>version</code> — current target version to build</li>
-    <li><code>ignored_versions</code> — unsupported, vulnerable, or skipped releases</li>
-  </ul>
-  <div class="callout-teal callout">
-    One JSON file = one Python package. Simple contract between version detection and build pipeline.
-  </div>
+<h3>Package Lifecycle</h3>
+<div class="flow-steps">
 
-  <h3>Package Lifecycle</h3>
-  <div class="flow-steps">
-    <div class="flow-step"><span class="num">1</span> <code>check-for-updates.py</code> queries PyPI + Pulp (every 12h)</div>
-    <div class="flow-step"><span class="num">2</span> Filters pre-releases and yanked versions</div>
-    <div class="flow-step"><span class="num">3</span> Creates PR per new version (updates JSON)</div>
-    <div class="flow-step"><span class="num">4</span> PR auto-merged (rebase strategy)</div>
-    <div class="flow-step"><span class="num">5</span> Merge triggers Tekton PipelineRun</div>
-    <div class="flow-step"><span class="num">6</span> <code>identify-packages</code> detects changed JSONs</div>
-    <div class="flow-step"><span class="num">7</span> Invokes <code>build-python-wheels</code> task</div>
-    <div class="flow-step"><span class="num">8</span> Wheels scanned &rarr; released &rarr; published</div>
-  </div>
+
+<div class="flow-step"><span class="num">1</span> <code>check-for-updates.py</code> queries PyPI + Pulp (every 12h)</div>
+
+
+<div class="flow-step"><span class="num">2</span> Filters pre-releases and yanked versions</div>
+
+
+<div class="flow-step"><span class="num">3</span> Creates PR per new version (updates JSON)</div>
+
+
+<div class="flow-step"><span class="num">4</span> PR auto-merged (rebase strategy)</div>
+
+
+<div class="flow-step"><span class="num">5</span> Merge triggers Tekton PipelineRun</div>
+
+
+<div class="flow-step"><span class="num">6</span> <code>identify-packages</code> detects changed JSONs</div>
+
+
+<div class="flow-step"><span class="num">7</span> Invokes <code>build-python-wheels</code> task</div>
+
+
+<div class="flow-step"><span class="num">8</span> Wheels scanned &rarr; released &rarr; published</div>
+
+
+</div>
 </section>
 
-<!-- Version Detection -->
 <section id="version-detection">
-  <h2>Automated Version Detection</h2>
-  <div class="diagram-wrap">
-    <div class="mermaid">
+<h2>Automated Version Detection</h2>
+<div class="diagram-wrap">
+<div class="mermaid">
 sequenceDiagram
     participant GH as GitHub Actions (12h cron)
     participant Script as check-for-updates.py
@@ -588,20 +643,18 @@ sequenceDiagram
     Script->>Repo: Create PR per new version
     Repo->>Repo: Auto-merge (rebase)
     Repo->>Repo: Tekton pipeline triggered
-    </div>
-  </div>
-  <div class="callout">
-    <strong>Async queries</strong> — all 1,045 packages checked concurrently.<br>
-    <strong>Smart filtering</strong> — pre-releases, yanked releases, and <code>ignored_versions</code> all excluded.<br>
-    <strong>Labels:</strong> PRs tagged "automated build" for tracking.
-  </div>
+</div>
+</div>
+
+<div class="callout">
+<strong>Async queries</strong> — all 1,045 packages checked concurrently.<br><strong>Smart filtering</strong> — pre-releases, yanked releases, and <code>ignored_versions</code> all excluded.<br><strong>Labels:</strong> PRs tagged "automated build" for tracking.
+</div>
 </section>
 
-<!-- Index Build Pipeline -->
 <section id="index-pipeline">
-  <h2>Index Build Pipeline</h2>
-  <div class="diagram-wrap">
-    <div class="mermaid">
+<h2>Index Build Pipeline</h2>
+<div class="diagram-wrap">
+<div class="mermaid">
 flowchart LR
     clone["clone-repository"] --> identify["identify-packages"]
     identify --> wheels["build-wheels"]
@@ -621,84 +674,127 @@ flowchart LR
 
     style scans fill:#400,color:#fff
     style release fill:#143,color:#fff
-    </div>
-  </div>
-  <div class="two-col">
-    <div class="card">
-      <h3>Build Resources</h3>
-      <ul>
-        <li><strong>Memory:</strong> 20GB for wheel builds</li>
-        <li><strong>Task:</strong> <code>build-python-wheels-oci-ta</code></li>
-        <li><strong>Image:</strong> pinned by SHA256 digest</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Output</h3>
-      <ul>
-        <li>IMAGE_URL — built wheel OCI artifact</li>
-        <li>IMAGE_DIGEST — SHA256 of artifact</li>
-        <li>GIT_COMMIT — source commit hash</li>
-      </ul>
-    </div>
-  </div>
+</div>
+</div>
+
+<div class="two-col">
+
+
+<div class="card">
+<h3>Build Resources</h3>
+
+
+- **Memory:** 20GB for wheel builds
+- **Task:** `build-python-wheels-oci-ta`
+- **Image:** pinned by SHA256 digest
+
+
+</div>
+
+
+<div class="card">
+<h3>Output</h3>
+
+
+- IMAGE_URL — built wheel OCI artifact
+- IMAGE_DIGEST — SHA256 of artifact
+- GIT_COMMIT — source commit hash
+
+
+</div>
+
+
+</div>
 </section>
 
-<!-- Onboarding New Packages -->
 <section id="onboarding">
-  <h2>Onboarding New Packages</h2>
-  <p>Adding a new package to Calunga uses <code>hack/onboard_package.py</code> in the index repo:</p>
+<h2>Onboarding New Packages</h2>
+<p>Adding a new package to Calunga uses <code>hack/onboard_package.py</code> in the index repo:</p>
+<div class="flow-steps">
 
-  <div class="flow-steps">
-    <div class="flow-step"><span class="num">1</span> Run <code>python hack/onboard_package.py &lt;package-name&gt;</code></div>
-    <div class="flow-step"><span class="num">2</span> Script queries PyPI for all releases</div>
-    <div class="flow-step"><span class="num">3</span> Filters out yanked and non-semver versions</div>
-    <div class="flow-step"><span class="num">4</span> Sets latest stable as target, all others as <code>ignored_versions</code></div>
-    <div class="flow-step"><span class="num">5</span> Creates <code>onboarded_packages/&lt;name&gt;.json</code></div>
-    <div class="flow-step"><span class="num">6</span> Commit, PR, merge &rarr; first build triggered automatically</div>
-  </div>
 
-  <div class="two-col">
-    <div class="card">
-      <h3>Input</h3>
-      <pre><code>python hack/onboard_package.py flask</code></pre>
-    </div>
-    <div class="card">
-      <h3>Output: flask.json</h3>
-      <pre><code>{
-    "version": "3.1.1",
-    "ignored_versions": ["0.1", "0.2", ...]
-}</code></pre>
-    </div>
-  </div>
+<div class="flow-step"><span class="num">1</span> Run <code>python hack/onboard_package.py &lt;package-name&gt;</code></div>
 
-  <div class="callout-teal callout">
-    Once onboarded, the 12-hour cron automatically detects new upstream releases and creates PRs.
-    No manual version bumping needed after initial onboarding.
-  </div>
+
+<div class="flow-step"><span class="num">2</span> Script queries PyPI for all releases</div>
+
+
+<div class="flow-step"><span class="num">3</span> Filters out yanked and non-semver versions</div>
+
+
+<div class="flow-step"><span class="num">4</span> Sets latest stable as target, all others as <code>ignored_versions</code></div>
+
+
+<div class="flow-step"><span class="num">5</span> Creates <code>onboarded_packages/&lt;name&gt;.json</code></div>
+
+
+<div class="flow-step"><span class="num">6</span> Commit, PR, merge &rarr; first build triggered automatically</div>
+
+
+</div>
+
+<div class="two-col">
+
+
+<div class="card">
+<h3>Input</h3>
+
+
+
+<pre><code>python hack/onboard_package.py flask
+</code></pre>
+
+
+
+</div>
+
+
+<div class="card">
+<h3>Output: flask.json</h3>
+
+
+
+<pre><code class="language-json">{
+    &quot;version&quot;: &quot;3.1.1&quot;,
+    &quot;ignored_versions&quot;: [&quot;0.1&quot;, &quot;0.2&quot;, ...]
+}
+</code></pre>
+
+
+
+</div>
+
+
+</div>
+
+<div class="callout callout-teal">
+Once onboarded, the 12-hour cron automatically detects new upstream releases and creates PRs. No manual version bumping needed after initial onboarding.
+</div>
 </section>
 
-<!-- How Repos Work Together -->
 <section id="repos-together">
-  <h2>How Repos Work Together</h2>
-
-  <h3>Dependency Chain</h3>
-  <div class="diagram-wrap">
-    <div class="mermaid">
+<h2>How Repos Work Together</h2>
+<h3>Dependency Chain</h3>
+<div class="diagram-wrap">
+<div class="mermaid">
 flowchart LR
-    A["plumbing-builder\nimage"] -->|runs inside| B["build-python-wheels\ntask (OCI bundle)"]
-    B -->|invoked by| C["index Tekton\npipeline"]
+    A["plumbing-builder
+image"] -->|runs inside| B["build-python-wheels
+task (OCI bundle)"]
+    B -->|invoked by| C["index Tekton
+pipeline"]
     C -->|publishes to| D["packages.redhat.com"]
 
     style A fill:#1a237e,color:#fff
     style B fill:#1a237e,color:#fff
     style C fill:#e65100,color:#fff
     style D fill:#1b5e20,color:#fff
-    </div>
-  </div>
+</div>
+</div>
 
-  <h3>Update Propagation</h3>
-  <div class="diagram-wrap">
-    <div class="mermaid">
+<h3>Update Propagation</h3>
+<div class="diagram-wrap">
+<div class="mermaid">
 sequenceDiagram
     participant P as Plumbing repo
     participant Q as Quay.io
@@ -712,286 +808,447 @@ sequenceDiagram
     I->>I: PR auto-merged
     Note over I: Subsequent builds use updated infrastructure
     I->>R: New wheels published
-    </div>
-  </div>
+</div>
+</div>
 </section>
 
-<!-- Integration Testing -->
 <section id="integration-testing">
-  <h2>Integration Testing</h2>
-  <div class="two-col">
-    <div>
-      <h3>Cross-OS Verification</h3>
-      <p>Built wheels tested across <strong>6 OS images</strong>:</p>
-      <div class="flow-steps">
-        <div class="flow-step"><span class="num teal">1</span> UBI8 (RHEL 8)</div>
-        <div class="flow-step"><span class="num teal">2</span> UBI9 (RHEL 9)</div>
-        <div class="flow-step"><span class="num teal">3</span> UBI10 (RHEL 10)</div>
-        <div class="flow-step"><span class="num teal">4</span> Fedora 43</div>
-        <div class="flow-step"><span class="num teal">5</span> Ubuntu 24.04</div>
-        <div class="flow-step"><span class="num teal">6</span> Hummingbird</div>
-      </div>
-    </div>
-    <div>
-      <h3>Per-Wheel Test Steps</h3>
-      <div class="flow-steps">
-        <div class="flow-step"><span class="num">1</span> Install wheel with pip/uv</div>
-        <div class="flow-step"><span class="num">2</span> Verify import succeeds</div>
-        <div class="flow-step"><span class="num">3</span> Check manylinux tag correct</div>
-        <div class="flow-step"><span class="num">4</span> Verify SBOM present (redhat.spdx.json)</div>
-        <div class="flow-step"><span class="num">5</span> Validate PURL qualifiers</div>
-      </div>
-      <div class="callout" style="margin-top:12px;">
-        Pipeline: <code>install-and-import-wheels.yaml</code><br>
-        Spans both repos — plumbing defines it, index triggers it.
-      </div>
-    </div>
-  </div>
+<h2>Integration Testing</h2>
+<div class="two-col">
+
+<div>
+
+### Cross-OS Verification
+
+Built wheels tested across **6 OS images**:
+
+
+<div class="flow-steps">
+
+
+<div class="flow-step"><span class="num teal">1</span> UBI8 (RHEL 8)</div>
+
+
+<div class="flow-step"><span class="num teal">2</span> UBI9 (RHEL 9)</div>
+
+
+<div class="flow-step"><span class="num teal">3</span> UBI10 (RHEL 10)</div>
+
+
+<div class="flow-step"><span class="num teal">4</span> Fedora 43</div>
+
+
+<div class="flow-step"><span class="num teal">5</span> Ubuntu 24.04</div>
+
+
+<div class="flow-step"><span class="num teal">6</span> Hummingbird</div>
+
+
+</div>
+
+
+</div>
+<div>
+
+### Per-Wheel Test Steps
+
+
+<div class="flow-steps">
+
+
+<div class="flow-step"><span class="num">1</span> Install wheel with pip/uv</div>
+
+
+<div class="flow-step"><span class="num">2</span> Verify import succeeds</div>
+
+
+<div class="flow-step"><span class="num">3</span> Check manylinux tag correct</div>
+
+
+<div class="flow-step"><span class="num">4</span> Verify SBOM present (redhat.spdx.json)</div>
+
+
+<div class="flow-step"><span class="num">5</span> Validate PURL qualifiers</div>
+
+
+</div>
+
+
+
+<div class="callout">
+Pipeline: <code>install-and-import-wheels.yaml</code><br>Spans both repos — plumbing defines it, index triggers it.
+</div>
+
+
+</div>
+
+</div>
 </section>
 
-<!-- Shared Infrastructure -->
 <section id="shared-infra">
-  <h2>Shared Infrastructure</h2>
-  <table>
-    <thead><tr><th>Resource</th><th>Plumbing</th><th>Index</th></tr></thead>
-    <tbody>
-      <tr><td><strong>Quay.io tenant</strong></td><td>calunga-tenant (images + bundles)</td><td>calunga-tenant (release artifacts)</td></tr>
-      <tr><td><strong>Konflux app</strong></td><td>calunga-v2-plumbing</td><td>calunga-v2-index-main</td></tr>
-      <tr><td><strong>Enterprise Contract</strong></td><td>Enforced on builder images</td><td>Enforced on wheel releases</td></tr>
-      <tr><td><strong><span class="glossary-term" tabindex="0">Nudge<span class="glossary-tip">Konflux auto-update mechanism. When plumbing publishes a new image or task bundle digest, nudge creates PRs in downstream repos to update pinned SHA256 references.</span></span> auto-updates</strong></td><td>Updates builder image refs in index</td><td>Updates task bundle refs</td></tr>
-    </tbody>
-  </table>
-  <div class="callout">
-    <strong>Fully automated pipeline:</strong> upstream Python release &rarr; version detection &rarr; source build &rarr;
-    security scan &rarr; compliance check &rarr; attestation &rarr; auto-release &rarr; packages.redhat.com
-  </div>
+<h2>Shared Infrastructure</h2>
+<table>
+<thead><tr><th>Resource</th><th>Plumbing</th><th>Index</th></tr></thead>
+<tbody>
+  <tr><td><strong>Quay.io tenant</strong></td><td>calunga-tenant (images + bundles)</td><td>calunga-tenant (release artifacts)</td></tr>
+  <tr><td><strong>Konflux app</strong></td><td>calunga-v2-plumbing</td><td>calunga-v2-index-main</td></tr>
+  <tr><td><strong>Enterprise Contract</strong></td><td>Enforced on builder images</td><td>Enforced on wheel releases</td></tr>
+  <tr><td><strong>
+<span class="glossary-term" tabindex="0">Nudge<span class="glossary-tip">Konflux auto-update mechanism. When plumbing publishes a new image or task bundle digest, nudge creates PRs in downstream repos to update pinned SHA256 references.</span></span>
+ auto-updates</strong></td><td>Updates builder image refs in index</td><td>Updates task bundle refs</td></tr>
+</tbody>
+</table>
+
+<div class="callout">
+<strong>Fully automated pipeline:</strong> upstream Python release &rarr; version detection &rarr; source build &rarr; security scan &rarr; compliance check &rarr; attestation &rarr; auto-release &rarr; packages.redhat.com
+</div>
 </section>
 
-<!-- Release Pipeline -->
 <section id="release-pipeline">
-  <h2>Release Pipeline</h2>
-  <p>After wheels pass security scans and Enterprise Contract checks, the release pipeline handles attestation, signing, and upload to the registry.</p>
-
-  <div class="diagram-wrap">
-    <div class="mermaid">
+<h2>Release Pipeline</h2>
+<p>After wheels pass security scans and Enterprise Contract checks, the release pipeline handles attestation, signing, and upload to the registry.</p>
+<div class="diagram-wrap">
+<div class="mermaid">
 flowchart LR
-    wheels["Built Wheels"] --> attest["Generate SLSA\nProvenance"]
-    attest --> sign["cosign sign\n(key-based)"]
-    sign --> pep740["Convert DSSE\nto PEP 740"]
-    pep740 --> check["Check if wheel\nexists in Pulp"]
-    check --> upload["Twine upload\n+ attestation"]
+    wheels["Built Wheels"] --> attest["Generate SLSA
+Provenance"]
+    attest --> sign["cosign sign
+(key-based)"]
+    sign --> pep740["Convert DSSE
+to PEP 740"]
+    pep740 --> check["Check if wheel
+exists in Pulp"]
+    check --> upload["Twine upload
++ attestation"]
     upload --> registry["packages.redhat.com"]
 
     style wheels fill:#1a237e,color:#fff
     style sign fill:#c62828,color:#fff
     style registry fill:#1b5e20,color:#fff
-    </div>
-  </div>
+</div>
+</div>
 
-  <div class="two-col">
-    <div class="card">
-      <h3>Attestation Flow</h3>
-      <ul>
-        <li>SHA256 hash computed for each wheel</li>
-        <li>SLSA v0.2 provenance predicate generated</li>
-        <li>Signed with <strong>cosign</strong> (key from K8s secret)</li>
-        <li>DSSE envelope converted to <strong>PEP 740</strong> format</li>
-        <li>Attestation uploaded alongside wheel</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Upload Logic</h3>
-      <ul>
-        <li><strong>Skip</strong> if wheel already exists in Pulp</li>
-        <li><strong>Skip</strong> if attestation file missing</li>
-        <li><strong>Fail</strong> if any upload errors or missing attestations</li>
-        <li>Summary report: uploaded / skipped / failed counts</li>
-      </ul>
-    </div>
-  </div>
+<div class="two-col">
 
-  <div class="callout">
-    <strong>Auto-release:</strong> Configured with a <strong>7-day grace period</strong> via Konflux ReleasePlan.
-    Standing attribution enabled — releases proceed automatically unless blocked.
-  </div>
+
+<div class="card">
+<h3>Attestation Flow</h3>
+
+
+- SHA256 hash computed for each wheel
+- SLSA v0.2 provenance predicate generated
+- Signed with **cosign** (key from K8s secret)
+- DSSE envelope converted to **PEP 740** format
+- Attestation uploaded alongside wheel
+
+
+</div>
+
+
+<div class="card">
+<h3>Upload Logic</h3>
+
+
+- **Skip** if wheel already exists in Pulp
+- **Skip** if attestation file missing
+- **Fail** if any upload errors or missing attestations
+- Summary report: uploaded / skipped / failed counts
+
+
+</div>
+
+
+</div>
+
+<div class="callout">
+<strong>Auto-release:</strong> Configured with a <strong>7-day grace period</strong> via Konflux ReleasePlan. Standing attribution enabled — releases proceed automatically unless blocked.
+</div>
 </section>
 
-<!-- Observability -->
 <section id="observability">
-  <h2>Observability</h2>
+<h2>Observability</h2>
+<div class="two-col">
 
-  <div class="two-col">
-    <div class="card">
-      <h3>Log Forwarding</h3>
-      <p>A separate GitHub Actions workflow (<code>forward_logs.yml</code>) triggers after every version-check run:</p>
-      <div class="flow-steps">
-        <div class="flow-step"><span class="num teal">1</span> <code>get_new_package_versions</code> workflow completes</div>
-        <div class="flow-step"><span class="num teal">2</span> Log forwarder downloads full run log via <code>gh run view --log</code></div>
-        <div class="flow-step"><span class="num teal">3</span> Logs POSTed to Splunk endpoint (token-authenticated)</div>
-      </div>
-    </div>
-    <div class="card">
-      <h3>PR Tracking</h3>
-      <ul>
-        <li>Automated version PRs labeled <strong>"automated build"</strong></li>
-        <li>Konflux nudge PRs labeled <strong>"konflux-nudge"</strong></li>
-        <li>Branch naming: <code>update-&lt;package&gt;==&lt;version&gt;</code></li>
-        <li>All PRs auto-merged with rebase strategy</li>
-      </ul>
-      <h3 style="margin-top:16px;">Build Artifacts</h3>
-      <ul>
-        <li>PR builds expire after <strong>5 days</strong></li>
-        <li>Push builds permanent (tagged by git revision)</li>
-        <li>All images referenced by <strong>SHA256 digest</strong></li>
-      </ul>
-    </div>
-  </div>
+
+<div class="card">
+<h3>Log Forwarding</h3>
+
+
+A separate GitHub Actions workflow (`forward_logs.yml`) triggers after every version-check run:
+
+
+<div class="flow-steps">
+
+
+<div class="flow-step"><span class="num teal">1</span> <code>get_new_package_versions</code> workflow completes</div>
+
+
+<div class="flow-step"><span class="num teal">2</span> Log forwarder downloads full run log via <code>gh run view --log</code></div>
+
+
+<div class="flow-step"><span class="num teal">3</span> Logs POSTed to Splunk endpoint (token-authenticated)</div>
+
+
+</div>
+
+
+
+</div>
+
+
+<div class="card">
+<h3>PR Tracking</h3>
+
+
+- Automated version PRs labeled **"automated build"**
+- Konflux nudge PRs labeled **"konflux-nudge"**
+- Branch naming: `update-<package>==<version>`
+- All PRs auto-merged with rebase strategy
+
+### Build Artifacts
+
+- PR builds expire after **5 days**
+- Push builds permanent (tagged by git revision)
+- All images referenced by **SHA256 digest**
+
+
+</div>
+
+
+</div>
 </section>
 
-<!-- Supply Chain Security -->
 <section id="supply-chain">
-  <h2>Supply Chain Security</h2>
-  <div class="security-grid">
-    <div class="security-item"><span class="icon">&#x1f512;</span><div><strong>Hash Pinning</strong><br>All Python deps use --require-hashes. Container/task refs pinned by SHA256.</div></div>
-    <div class="security-item"><span class="icon">&#x1f3d7;&#xfe0f;</span><div><strong>Source Builds</strong><br>17 C/C++ libs compiled from source with verified checksums. No pre-built binaries.</div></div>
-    <div class="security-item"><span class="icon">&#x1f4cb;</span><div><strong>SBOM Embedding</strong><br>Every wheel contains redhat.spdx.json with supplier info and PURLs.</div></div>
-    <div class="security-item"><span class="icon">&#x1f50d;</span><div><strong>Security Scanning</strong><br>6 scans per build: Clair, Snyk, ClamAV, Coverity, ShellCheck, Unicode.</div></div>
-    <div class="security-item"><span class="icon">&#x1f4dc;</span><div><strong>Enterprise Contract Policy</strong><br>Red Hat compliance enforcement on every release.</div></div>
-    <div class="security-item"><span class="icon">&#x270d;&#xfe0f;</span><div><strong>Attestation</strong><br>Provenance and signing via cosign (Sigstore).</div></div>
-    <div class="security-item"><span class="icon">&#x1f3e0;</span><div><strong>Hermetic Builds</strong><br>Optional fully isolated mode — zero network access during build.</div></div>
-    <div class="security-item"><span class="icon">&#x1f4e6;</span><div><strong><span class="glossary-term" tabindex="0">OCI Trusted Artifacts<span class="glossary-tip">Konflux pattern for passing data between Tekton tasks via OCI artifacts stored in a registry, instead of shared PersistentVolumeClaims. Provides immutability and auditability.</span></span></strong><br>Data passes between tasks via OCI artifacts, not shared volumes.</div></div>
-  </div>
+<h2>Supply Chain Security</h2>
+<div class="security-grid">
+
+
+<div class="security-item"><span class="icon">&#x1f512;</span><div><strong>Hash Pinning</strong><br>All Python deps use --require-hashes. Container/task refs pinned by SHA256.</div></div>
+
+
+<div class="security-item"><span class="icon">&#x1f3d7;&#xfe0f;</span><div><strong>Source Builds</strong><br>17 C/C++ libs compiled from source with verified checksums. No pre-built binaries.</div></div>
+
+
+<div class="security-item"><span class="icon">&#x1f4cb;</span><div><strong>SBOM Embedding</strong><br>Every wheel contains redhat.spdx.json with supplier info and PURLs.</div></div>
+
+
+<div class="security-item"><span class="icon">&#x1f50d;</span><div><strong>Security Scanning</strong><br>6 scans per build: Clair, Snyk, ClamAV, Coverity, ShellCheck, Unicode.</div></div>
+
+
+<div class="security-item"><span class="icon">&#x1f4dc;</span><div><strong>Enterprise Contract Policy</strong><br>Red Hat compliance enforcement on every release.</div></div>
+
+
+<div class="security-item"><span class="icon">&#x270d;&#xfe0f;</span><div><strong>Attestation</strong><br>Provenance and signing via cosign (Sigstore).</div></div>
+
+
+<div class="security-item"><span class="icon">&#x1f3e0;</span><div><strong>Hermetic Builds</strong><br>Optional fully isolated mode — zero network access during build.</div></div>
+
+
+<div class="security-item"><span class="icon">&#x1f4e6;</span><div><strong>
+<span class="glossary-term" tabindex="0">OCI Trusted Artifacts<span class="glossary-tip">Konflux pattern for passing data between Tekton tasks via OCI artifacts stored in a registry, instead of shared PersistentVolumeClaims. Provides immutability and auditability.</span></span>
+</strong><br>Data passes between tasks via OCI artifacts, not shared volumes.</div></div>
+
+
+</div>
 </section>
 
-<!-- Support Matrix -->
 <section id="support-matrix">
-  <h2>Support Matrix &amp; Roadmap</h2>
+<h2>Support Matrix & Roadmap</h2>
+<div class="two-col">
 
-  <div class="two-col">
-    <div class="card">
-      <h3>Python Versions</h3>
-      <table>
-        <thead><tr><th>Version</th><th>Status</th></tr></thead>
-        <tbody>
-          <tr><td>Python 2.x</td><td style="color:#f44;">Not supported</td></tr>
-          <tr><td>Python 3.9 – 3.10</td><td style="color:#f44;">Not supported</td></tr>
-          <tr><td><strong>Python 3.12</strong></td><td style="color:var(--rh-green);">Fully supported</td></tr>
-          <tr><td>Python 3.11, 3.13, 3.14</td><td style="color:var(--rh-gold);">Planned</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="card">
-      <h3>Architectures</h3>
-      <table>
-        <thead><tr><th>Arch</th><th>Status</th></tr></thead>
-        <tbody>
-          <tr><td><strong>x86_64</strong></td><td style="color:var(--rh-green);">Fully supported</td></tr>
-          <tr><td>aarch64</td><td style="color:var(--rh-gold);">Planned</td></tr>
-        </tbody>
-      </table>
-      <h3 style="margin-top:16px;">Manylinux Target</h3>
-      <p style="font-size:0.9rem;">Primary: <code>manylinux_2_28</code> (glibc 2.28+, RHEL 8+).<br>
-      Some wheels also carry <code>manylinux_2_27</code> compatibility.</p>
-    </div>
-  </div>
 
-  <h3>Alternative Python Runtimes</h3>
-  <p>The builder image includes multiple Python runtimes beyond CPython, all SHA256-pinned:</p>
-  <table>
-    <thead><tr><th>Runtime</th><th>Versions</th><th>Architectures</th></tr></thead>
-    <tbody>
-      <tr><td><strong>CPython</strong></td><td>3.12.12 (from source)</td><td>x86_64, aarch64</td></tr>
-      <tr><td><strong>PyPy</strong></td><td>3.8 – 3.11</td><td>x86_64, aarch64, i686</td></tr>
-      <tr><td><strong>GraalPy</strong></td><td>3.11 (24.2.2), 3.12 (25.0.1)</td><td>x86_64, aarch64</td></tr>
-    </tbody>
-  </table>
-  <div class="callout">
-    All interpreter downloads are pinned by SHA256 hash in <code>python_versions.json</code> for reproducibility.
-  </div>
+<div class="card">
+<h3>Python Versions</h3>
+
+
+<table>
+<thead><tr><th>Version</th><th>Status</th></tr></thead>
+<tbody>
+  <tr><td>Python 2.x</td><td style="color:#f44;">Not supported</td></tr>
+  <tr><td>Python 3.9 – 3.10</td><td style="color:#f44;">Not supported</td></tr>
+  <tr><td><strong>Python 3.12</strong></td><td style="color:var(--rh-green);">Fully supported</td></tr>
+  <tr><td>Python 3.11, 3.13, 3.14</td><td style="color:var(--rh-gold);">Planned</td></tr>
+</tbody>
+</table>
+
+
+</div>
+
+
+<div class="card">
+<h3>Architectures</h3>
+
+
+<table>
+<thead><tr><th>Arch</th><th>Status</th></tr></thead>
+<tbody>
+  <tr><td><strong>x86_64</strong></td><td style="color:var(--rh-green);">Fully supported</td></tr>
+  <tr><td>aarch64</td><td style="color:var(--rh-gold);">Planned</td></tr>
+</tbody>
+</table>
+
+### Manylinux Target
+
+Primary: `manylinux_2_28` (glibc 2.28+, RHEL 8+).
+Some wheels also carry `manylinux_2_27` compatibility.
+
+
+</div>
+
+
+</div>
+
+<h3>Alternative Python Runtimes</h3>
+<p>The builder image includes multiple Python runtimes beyond CPython, all SHA256-pinned:</p>
+<table>
+<thead><tr><th>Runtime</th><th>Versions</th><th>Architectures</th></tr></thead>
+<tbody>
+  <tr><td><strong>CPython</strong></td><td>3.12.12 (from source)</td><td>x86_64, aarch64</td></tr>
+  <tr><td><strong>PyPy</strong></td><td>3.8 – 3.11</td><td>x86_64, aarch64, i686</td></tr>
+  <tr><td><strong>GraalPy</strong></td><td>3.11 (24.2.2), 3.12 (25.0.1)</td><td>x86_64, aarch64</td></tr>
+</tbody>
+</table>
+
+<div class="callout">
+All interpreter downloads are pinned by SHA256 hash in <code>python_versions.json</code> for reproducibility.
+</div>
 </section>
 
-<!-- Technology Glossary -->
 <section id="glossary">
-  <h2>Technology Glossary</h2>
-  <div class="glossary-grid">
-    <div class="glossary-card" id="gl-fromager"><strong>Fromager</strong> Python wheel build orchestrator. Resolves full dependency graph from source distributions, builds each package in order, embeds CycloneDX SBOMs. Ensures wheels built from source — not pre-built from PyPI.</div>
-    <div class="glossary-card" id="gl-auditwheel"><strong>auditwheel</strong> Post-build compliance tool. Inspects Linux wheels for shared library deps, bundles required .so files, relabels with correct manylinux platform tag (e.g., manylinux_2_28).</div>
-    <div class="glossary-card" id="gl-tekton"><strong>Tekton</strong> Kubernetes-native CI/CD. Pipelines defined as YAML CRDs (Tasks, Pipelines, PipelineRuns). Each step runs in its own container. Used here via Konflux.</div>
-    <div class="glossary-card" id="gl-konflux"><strong>Konflux</strong> Red Hat's enterprise CI/CD on Tekton. Adds Enterprise Contract Policy, release management, nudge-based auto-updates, and OCI Trusted Artifacts.</div>
-    <div class="glossary-card" id="gl-buildah"><strong>Buildah</strong> Daemonless container builder. Builds OCI/Docker images from Containerfiles without Docker daemon. Used by Tekton tasks for builder/utils images.</div>
-    <div class="glossary-card" id="gl-twine"><strong>Twine</strong> Python package upload tool. Publishes wheels to PyPI-compatible registries (here: Red Hat's Pulp at packages.redhat.com).</div>
-    <div class="glossary-card" id="gl-ubi"><strong>UBI</strong> Universal Base Image. Red Hat's freely redistributable minimal container base. UBI8 = RHEL 8 userspace (builder), UBI10 = RHEL 10 (utils/index).</div>
-    <div class="glossary-card" id="gl-pip-compile"><strong>pip-compile</strong> Dependency resolver (pip-tools). Generates pinned requirements.txt with SHA256 hashes from loose requirements.in. Ensures reproducible installs.</div>
-    <div class="glossary-card" id="gl-oci-ta"><strong>OCI Trusted Artifacts</strong> Konflux pattern: pass data between Tekton tasks via OCI artifacts in a registry, not shared PVCs. Immutable and auditable.</div>
-    <div class="glossary-card" id="gl-cosign"><strong>cosign</strong> Sigstore tool for signing/verifying container images and artifacts. Used for attestation and provenance in the release pipeline.</div>
-    <div class="glossary-card" id="gl-pulp"><strong>Pulp</strong> Red Hat's repository management platform. Hosts the RHTL Python package index. Version-detection cron checks Pulp for already-published versions.</div>
-    <div class="glossary-card" id="gl-ecp"><strong>Enterprise Contract Policy (ECP)</strong> Konflux policy framework. Validates builds meet Red Hat compliance (provenance, signatures, SBOM) before allowing releases.</div>
-    <div class="glossary-card" id="gl-cyclonedx"><strong>CycloneDX / SPDX</strong> SBOM standards. Fromager generates CycloneDX SBOMs embedded as redhat.spdx.json, listing components and provenance.</div>
-    <div class="glossary-card" id="gl-manylinux"><strong>manylinux</strong> PEP-defined Linux wheel compatibility standard. Specifies max glibc version and allowed shared libs. manylinux_2_28 = glibc 2.28+ (RHEL 8+).</div>
-    <div class="glossary-card" id="gl-gcc"><strong>gcc-toolset-14</strong> Red Hat's SCL-packaged GCC 14 for UBI8/RHEL 8. Modern C/C++ compilation without replacing system GCC.</div>
-    <div class="glossary-card" id="gl-nudge"><strong>Nudge</strong> Konflux auto-update mechanism. When plumbing publishes new image/task digest, nudge creates PRs in downstream repos to update pinned SHA256 refs.</div>
-    <div class="glossary-card" id="gl-graalpy"><strong>GraalPy</strong> Oracle's Python implementation on GraalVM. Supports 3.11 and 3.12. Included in builder for alternative runtime wheel compatibility testing. SHA256-pinned downloads.</div>
-    <div class="glossary-card" id="gl-pep740"><strong>PEP 740</strong> Python standard for digital attestations on packages. Defines how provenance metadata is attached to wheels for upload to PyPI-compatible registries. Calunga converts DSSE envelopes to PEP 740 format.</div>
-  </div>
+<h2>Technology Glossary</h2>
+<div class="glossary-grid">
+
+
+<div class="glossary-card" id="gl-fromager"><strong>Fromager</strong> Python wheel build orchestrator. Resolves full dependency graph from source distributions, builds each package in order, embeds CycloneDX SBOMs. Ensures wheels built from source — not pre-built from PyPI.</div>
+
+
+<div class="glossary-card" id="gl-auditwheel"><strong>auditwheel</strong> Post-build compliance tool. Inspects Linux wheels for shared library deps, bundles required .so files, relabels with correct manylinux platform tag (e.g., manylinux_2_28).</div>
+
+
+<div class="glossary-card" id="gl-tekton"><strong>Tekton</strong> Kubernetes-native CI/CD. Pipelines defined as YAML CRDs (Tasks, Pipelines, PipelineRuns). Each step runs in its own container. Used here via Konflux.</div>
+
+
+<div class="glossary-card" id="gl-konflux"><strong>Konflux</strong> Red Hat's enterprise CI/CD on Tekton. Adds Enterprise Contract Policy, release management, nudge-based auto-updates, and OCI Trusted Artifacts.</div>
+
+
+<div class="glossary-card" id="gl-buildah"><strong>Buildah</strong> Daemonless container builder. Builds OCI/Docker images from Containerfiles without Docker daemon. Used by Tekton tasks for builder/utils images.</div>
+
+
+<div class="glossary-card" id="gl-twine"><strong>Twine</strong> Python package upload tool. Publishes wheels to PyPI-compatible registries (here: Red Hat's Pulp at packages.redhat.com).</div>
+
+
+<div class="glossary-card" id="gl-ubi"><strong>UBI</strong> Universal Base Image. Red Hat's freely redistributable minimal container base. UBI8 = RHEL 8 userspace (builder), UBI10 = RHEL 10 (utils/index).</div>
+
+
+<div class="glossary-card" id="gl-pip-compile"><strong>pip-compile</strong> Dependency resolver (pip-tools). Generates pinned requirements.txt with SHA256 hashes from loose requirements.in. Ensures reproducible installs.</div>
+
+
+<div class="glossary-card" id="gl-oci-ta"><strong>OCI Trusted Artifacts</strong> Konflux pattern: pass data between Tekton tasks via OCI artifacts in a registry, not shared PVCs. Immutable and auditable.</div>
+
+
+<div class="glossary-card" id="gl-cosign"><strong>cosign</strong> Sigstore tool for signing/verifying container images and artifacts. Used for attestation and provenance in the release pipeline.</div>
+
+
+<div class="glossary-card" id="gl-pulp"><strong>Pulp</strong> Red Hat's repository management platform. Hosts the RHTL Python package index. Version-detection cron checks Pulp for already-published versions.</div>
+
+
+<div class="glossary-card" id="gl-ecp"><strong>Enterprise Contract Policy (ECP)</strong> Konflux policy framework. Validates builds meet Red Hat compliance (provenance, signatures, SBOM) before allowing releases.</div>
+
+
+<div class="glossary-card" id="gl-cyclonedx"><strong>CycloneDX / SPDX</strong> SBOM standards. Fromager generates CycloneDX SBOMs embedded as redhat.spdx.json, listing components and provenance.</div>
+
+
+<div class="glossary-card" id="gl-manylinux"><strong>manylinux</strong> PEP-defined Linux wheel compatibility standard. Specifies max glibc version and allowed shared libs. manylinux_2_28 = glibc 2.28+ (RHEL 8+).</div>
+
+
+<div class="glossary-card" id="gl-gcc"><strong>gcc-toolset-14</strong> Red Hat's SCL-packaged GCC 14 for UBI8/RHEL 8. Modern C/C++ compilation without replacing system GCC.</div>
+
+
+<div class="glossary-card" id="gl-nudge"><strong>Nudge</strong> Konflux auto-update mechanism. When plumbing publishes new image/task digest, nudge creates PRs in downstream repos to update pinned SHA256 refs.</div>
+
+
+<div class="glossary-card" id="gl-graalpy"><strong>GraalPy</strong> Oracle's Python implementation on GraalVM. Supports 3.11 and 3.12. Included in builder for alternative runtime wheel compatibility testing. SHA256-pinned downloads.</div>
+
+
+<div class="glossary-card" id="gl-pep740"><strong>PEP 740</strong> Python standard for digital attestations on packages. Defines how provenance metadata is attached to wheels for upload to PyPI-compatible registries. Calunga converts DSSE envelopes to PEP 740 format.</div>
+
+
+</div>
 </section>
 
-<!-- Quick Reference -->
 <section id="quick-ref">
-  <h2>Quick Reference</h2>
-  <div class="two-col">
-    <div>
-      <h3>Key Paths (Plumbing)</h3>
-      <table>
-        <tbody>
-          <tr><td><code>builder/Containerfile</code></td><td>Main builder image (2000+ lines)</td></tr>
-          <tr><td><code>builder/scripts/build-wheels</code></td><td>Wheel build entry point</td></tr>
-          <tr><td><code>builder/build_scripts/</code></td><td>17 library build scripts</td></tr>
-          <tr><td><code>builder/requirements.txt</code></td><td>Hash-pinned Fromager deps</td></tr>
-          <tr><td><code>tasks/build-python-wheels-oci-ta.yaml</code></td><td>Tekton task definition</td></tr>
-          <tr><td><code>pipelines/wheel-integration-test.yaml</code></td><td>Cross-OS test pipeline</td></tr>
-          <tr><td><code>utils/scripts/pulp-upload</code></td><td>Pulp registry upload with attestation</td></tr>
-          <tr><td><code>utils/scripts/generate-and-sign-attestations</code></td><td>cosign attestation + PEP 740 conversion</td></tr>
-          <tr><td><code>.tekton/</code></td><td>PipelineRun definitions</td></tr>
-        </tbody>
-      </table>
+<h2>Quick Reference</h2>
+<div class="two-col">
 
-      <h3>Key Paths (Index)</h3>
-      <table>
-        <tbody>
-          <tr><td><code>onboarded_packages/*.json</code></td><td>1,045 package definitions</td></tr>
-          <tr><td><code>hack/check-for-updates.py</code></td><td>Version detection script</td></tr>
-          <tr><td><code>hack/identify-packages</code></td><td>Changed-package detector</td></tr>
-          <tr><td><code>hack/onboard_package.py</code></td><td>New package onboarding script</td></tr>
-          <tr><td><code>.tekton/build-pipeline.yaml</code></td><td>Main build pipeline</td></tr>
-          <tr><td><code>konflux/ecp.yaml</code></td><td>Enterprise Contract Policy</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div>
-      <h3>User Configuration</h3>
-      <pre><code># pip.conf
+<div>
+
+### Key Paths (Plumbing)
+
+<table>
+<tbody>
+  <tr><td><code>builder/Containerfile</code></td><td>Main builder image (2000+ lines)</td></tr>
+  <tr><td><code>builder/scripts/build-wheels</code></td><td>Wheel build entry point</td></tr>
+  <tr><td><code>builder/build_scripts/</code></td><td>17 library build scripts</td></tr>
+  <tr><td><code>builder/requirements.txt</code></td><td>Hash-pinned Fromager deps</td></tr>
+  <tr><td><code>tasks/build-python-wheels-oci-ta.yaml</code></td><td>Tekton task definition</td></tr>
+  <tr><td><code>pipelines/wheel-integration-test.yaml</code></td><td>Cross-OS test pipeline</td></tr>
+  <tr><td><code>utils/scripts/pulp-upload</code></td><td>Pulp registry upload with attestation</td></tr>
+  <tr><td><code>utils/scripts/generate-and-sign-attestations</code></td><td>cosign attestation + PEP 740 conversion</td></tr>
+  <tr><td><code>.tekton/</code></td><td>PipelineRun definitions</td></tr>
+</tbody>
+</table>
+
+### Key Paths (Index)
+
+<table>
+<tbody>
+  <tr><td><code>onboarded_packages/*.json</code></td><td>1,045 package definitions</td></tr>
+  <tr><td><code>hack/check-for-updates.py</code></td><td>Version detection script</td></tr>
+  <tr><td><code>hack/identify-packages</code></td><td>Changed-package detector</td></tr>
+  <tr><td><code>hack/onboard_package.py</code></td><td>New package onboarding script</td></tr>
+  <tr><td><code>.tekton/build-pipeline.yaml</code></td><td>Main build pipeline</td></tr>
+  <tr><td><code>konflux/ecp.yaml</code></td><td>Enterprise Contract Policy</td></tr>
+</tbody>
+</table>
+
+</div>
+<div>
+
+### User Configuration
+
+
+<pre><code># pip.conf
 [global]
 extra-index-url =
-    https://packages.redhat.com/trusted-libraries/python/simple/</code></pre>
-      <pre><code># pyproject.toml (uv)
-[[tool.uv.index]]
-url = "https://packages.redhat.com/trusted-libraries/python/simple/"
-name = "rhtl"</code></pre>
+    https://packages.redhat.com/trusted-libraries/python/simple/
+</code></pre>
 
-      <h3>Key Numbers</h3>
-      <table>
-        <tbody>
-          <tr><td>Packages</td><td><strong>1,045+</strong></td></tr>
-          <tr><td>Source-built libs</td><td><strong>17</strong></td></tr>
-          <tr><td>Security scans</td><td><strong>6 types</strong></td></tr>
-          <tr><td>Test OS targets</td><td><strong>6</strong></td></tr>
-          <tr><td>Pipeline tasks</td><td><strong>17</strong></td></tr>
-          <tr><td>Version check interval</td><td><strong>12 hours</strong></td></tr>
-          <tr><td>Release grace period</td><td><strong>7 days</strong></td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+
+
+<pre><code># pyproject.toml (uv)
+[[tool.uv.index]]
+url = &quot;https://packages.redhat.com/trusted-libraries/python/simple/&quot;
+name = &quot;rhtl&quot;
+</code></pre>
+
+
+### Key Numbers
+
+<table>
+<tbody>
+  <tr><td>Packages</td><td><strong>1,045+</strong></td></tr>
+  <tr><td>Source-built libs</td><td><strong>17</strong></td></tr>
+  <tr><td>Security scans</td><td><strong>6 types</strong></td></tr>
+  <tr><td>Test OS targets</td><td><strong>6</strong></td></tr>
+  <tr><td>Pipeline tasks</td><td><strong>17</strong></td></tr>
+  <tr><td>Version check interval</td><td><strong>12 hours</strong></td></tr>
+  <tr><td>Release grace period</td><td><strong>7 days</strong></td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
 </section>
 
 </main>
@@ -1017,7 +1274,6 @@ mermaid.initialize({
   sequence: { mirrorActors: false }
 });
 
-// Scroll spy for sidebar
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.sidebar nav a[href^="#"]');
 const backToTop = document.querySelector('.back-to-top');
