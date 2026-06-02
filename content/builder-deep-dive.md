@@ -41,9 +41,9 @@ title: "Builder Image: Source-Built Libraries"
 
 {{ card("Key Tools") }}
 
-- **{{ glossary("Fromager", "Python wheel build orchestrator. Resolves full dependency graph from source distributions, builds each package in order, and embeds CycloneDX SBOMs.") }}** — orchestrates full dep graph builds
-- **{{ glossary("auditwheel", "Post-build compliance tool. Inspects Linux wheels for shared library deps, bundles required .so files, relabels with correct manylinux platform tag.") }}** — bundles .so, sets manylinux tag
-- **pip-compile** — hash-pinned requirements
+- **{{ glossary("Fromager", "Python wheel build orchestrator. Resolves full dependency graph from source distributions, builds each package in order, and embeds CycloneDX SBOMs.") }}** - orchestrates full dep graph builds
+- **{{ glossary("auditwheel", "Post-build compliance tool. Inspects Linux wheels for shared library deps, bundles required .so files, relabels with correct manylinux platform tag.") }}** - bundles .so, sets manylinux tag
+- **pip-compile** - hash-pinned requirements
 
 {{ card_end() }}
 </div>

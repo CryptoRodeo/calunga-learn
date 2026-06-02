@@ -14,8 +14,8 @@ Each package has a JSON file in `onboarded_packages/`:
 }
 ```
 
-- `version` — current target version to build
-- `ignored_versions` — unsupported, vulnerable, or skipped releases
+- `version` - current target version to build
+- `ignored_versions` - unsupported, vulnerable, or skipped releases
 
 {{ callout("One JSON file = one Python package. Simple contract between version detection and build pipeline.", style="teal") }}
 

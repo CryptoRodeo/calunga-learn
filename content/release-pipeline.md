@@ -37,4 +37,4 @@ After wheels pass security scans and Enterprise Contract checks, the release pip
 {{ card_end() }}
 {{ two_col_end() }}
 
-{{ callout("<strong>Auto-release:</strong> Configured with a <strong>7-day grace period</strong> via Konflux ReleasePlan. Standing attribution enabled — releases proceed automatically unless blocked.") }}
+{{ callout("<strong>Auto-release:</strong> Configured with a <strong>7-day grace period</strong> via Konflux ReleasePlan. Standing attribution enabled - releases proceed automatically unless blocked.") }}

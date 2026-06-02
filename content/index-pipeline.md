@@ -33,9 +33,9 @@ title: Index Build Pipeline
 {{ card_end() }}
 {{ card("Output") }}
 
-- IMAGE_URL — built wheel OCI artifact
-- IMAGE_DIGEST — SHA256 of artifact
-- GIT_COMMIT — source commit hash
+- IMAGE_URL - built wheel OCI artifact
+- IMAGE_DIGEST - SHA256 of artifact
+- GIT_COMMIT - source commit hash
 
 {{ card_end() }}
 {{ two_col_end() }}

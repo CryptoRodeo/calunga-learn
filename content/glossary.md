@@ -4,7 +4,7 @@ title: Technology Glossary
 ---
 
 {{ glossary_grid_start() }}
-{{ glossary_card("gl-fromager", "Fromager", "Python wheel build orchestrator. Resolves full dependency graph from source distributions, builds each package in order, embeds CycloneDX SBOMs. Ensures wheels built from source — not pre-built from PyPI.") }}
+{{ glossary_card("gl-fromager", "Fromager", "Python wheel build orchestrator. Resolves full dependency graph from source distributions, builds each package in order, embeds CycloneDX SBOMs. Ensures wheels built from source - not pre-built from PyPI.") }}
 {{ glossary_card("gl-auditwheel", "auditwheel", "Post-build compliance tool. Inspects Linux wheels for shared library deps, bundles required .so files, relabels with correct manylinux platform tag (e.g., manylinux_2_28).") }}
 {{ glossary_card("gl-tekton", "Tekton", "Kubernetes-native CI/CD. Pipelines defined as YAML CRDs (Tasks, Pipelines, PipelineRuns). Each step runs in its own container. Used here via Konflux.") }}
 {{ glossary_card("gl-konflux", "Konflux", "Red Hat's enterprise CI/CD on Tekton. Adds Enterprise Contract Policy, release management, nudge-based auto-updates, and OCI Trusted Artifacts.") }}

@@ -32,7 +32,7 @@ Built wheels tested across **6 OS images**:
 {{ flow_step(5, "Validate PURL qualifiers") }}
 {{ flow_steps_end() }}
 
-{{ callout("Pipeline: <code>install-and-import-wheels.yaml</code><br>Spans both repos — plumbing defines it, index triggers it.") }}
+{{ callout("Pipeline: <code>install-and-import-wheels.yaml</code><br>Spans both repos - plumbing defines it, index triggers it.") }}
 
 </div>
 {{ two_col_end() }}

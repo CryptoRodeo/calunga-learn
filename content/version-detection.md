@@ -20,4 +20,4 @@ title: Automated Version Detection
     Repo->>Repo: Auto-merge (rebase)
     Repo->>Repo: Tekton pipeline triggered") }}
 
-{{ callout("<strong>Async queries</strong> — all 1,045 packages checked concurrently.<br><strong>Smart filtering</strong> — pre-releases, yanked releases, and <code>ignored_versions</code> all excluded.<br><strong>Labels:</strong> PRs tagged \"automated build\" for tracking.") }}
+{{ callout("<strong>Async queries</strong> - all 1,045 packages checked concurrently.<br><strong>Smart filtering</strong> - pre-releases, yanked releases, and <code>ignored_versions</code> all excluded.<br><strong>Labels:</strong> PRs tagged \"automated build\" for tracking.") }}
