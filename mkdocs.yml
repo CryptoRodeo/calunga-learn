@@ -1,0 +1,77 @@
+site_name: Calunga Learn
+site_description: Red Hat Trusted Libraries - Secure Python supply chain
+
+theme:
+  name: material
+  palette:
+    scheme: slate
+    primary: custom
+    accent: custom
+  font:
+    text: Segoe UI
+    code: JetBrains Mono
+  features:
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.tracking
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/extra.js
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - attr_list
+  - md_in_html
+  - abbr
+  - pymdownx.snippets:
+      auto_append:
+        - docs/includes/glossary.md
+  - tables
+  - toc:
+      permalink: "#"
+
+nav:
+  - Overview: index.md
+  - Why Calunga?: why.md
+  - Getting Started: getting-started.md
+  - Architecture:
+    - Two Repos, One System: repos.md
+    - Technology Stack: tech-stack.md
+    - End-to-End Flow: e2e-flow.md
+  - Plumbing:
+    - Container Images: container-images.md
+    - Builder Deep Dive: builder-deep-dive.md
+    - Scripts & Pipelines: scripts-pipelines.md
+    - Builder Tests: builder-tests.md
+  - Index:
+    - Package Management: package-management.md
+    - Version Detection: version-detection.md
+    - Build Pipeline: index-pipeline.md
+    - Onboarding Packages: onboarding.md
+  - Integration:
+    - How Repos Connect: repos-together.md
+    - Integration Testing: integration-testing.md
+    - Shared Infrastructure: shared-infra.md
+    - Release Pipeline: release-pipeline.md
+    - Observability: observability.md
+  - Security & Reference:
+    - Supply Chain Security: supply-chain.md
+    - Support Matrix: support-matrix.md
+    - Technology Glossary: glossary.md
+    - Quick Reference: quick-ref.md

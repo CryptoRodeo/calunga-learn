@@ -1,9 +1,7 @@
----
-id: version-detection
-title: Automated Version Detection
----
+# Automated Version Detection
 
-{{ diagram("sequenceDiagram
+```mermaid
+sequenceDiagram
     participant GH as GitHub Actions (12h cron)
     participant Script as check-for-updates.py
     participant PyPI as PyPI
@@ -18,6 +16,11 @@ title: Automated Version Detection
     Script->>Script: Filter pre-releases, yanked, ignored
     Script->>Repo: Create PR per new version
     Repo->>Repo: Auto-merge (rebase)
-    Repo->>Repo: Tekton pipeline triggered") }}
+    Repo->>Repo: Tekton pipeline triggered
+```
 
-{{ callout("<strong>Async queries</strong> - all 1,045 packages checked concurrently.<br><strong>Smart filtering</strong> - pre-releases, yanked releases, and <code>ignored_versions</code> all excluded.<br><strong>Labels:</strong> PRs tagged \"automated build\" for tracking.") }}
+!!! note ""
+
+    **Async queries** - all 1,045 packages checked concurrently.
+    **Smart filtering** - pre-releases, yanked releases, and `ignored_versions` all excluded.
+    **Labels:** PRs tagged "automated build" for tracking.

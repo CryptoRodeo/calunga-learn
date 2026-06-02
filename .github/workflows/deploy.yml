@@ -26,16 +26,11 @@ jobs:
 
       - run: pip install -r requirements.txt
 
-      - run: python build.py
-
-      - run: |
-          mkdir _site
-          cp index.html _site/
-          cp -r static _site/
+      - run: mkdocs build
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: site
 
   deploy:
     needs: build
