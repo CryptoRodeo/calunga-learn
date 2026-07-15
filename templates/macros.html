@@ -1,0 +1,101 @@
+{# ── Callout boxes ── #}
+{% macro callout(text, style="red") %}
+<div class="callout{% if style == 'teal' %} callout-teal{% endif %}">
+{{ text }}
+</div>
+{% endmacro %}
+
+{# ── Two-column grid ── #}
+{% macro two_col_start() %}
+<div class="two-col" markdown="1">
+{% endmacro %}
+
+{% macro two_col_end() %}
+</div>
+{% endmacro %}
+
+{# ── Card ── #}
+{% macro card(title, color="teal") %}
+<div class="card" markdown="1">
+
+<h3{% if color == "red" %} style="color:var(--rh-red);"{% elif color == "green" %} style="color:var(--rh-green);"{% endif %}>{{ title }}</h3>
+
+{% endmacro %}
+
+{% macro card_end() %}
+</div>
+{% endmacro %}
+
+{# ── Badge row ── #}
+{% macro badge_row(badges) %}
+<div class="badge-row">
+{% for b in badges %}
+<span class="badge">{{ b }}</span>
+{% endfor %}
+</div>
+{% endmacro %}
+
+{# ── Flow steps ── #}
+{% macro flow_steps_start() %}
+<div class="flow-steps">
+{% endmacro %}
+
+{% macro flow_step(num, text, color="red") %}
+<div class="flow-step"><span class="num{% if color == 'teal' %} teal{% endif %}">{{ num }}</span> {{ text }}</div>
+{% endmacro %}
+
+{% macro flow_steps_end() %}
+</div>
+{% endmacro %}
+
+{# ── Glossary tooltip (inline) ── #}
+{%- macro glossary(term, definition) -%}
+<span class="glossary-term" tabindex="0">{{ term }}<span class="glossary-tip">{{ definition }}</span></span>
+{%- endmacro -%}
+
+{# ── Security grid ── #}
+{% macro security_grid_start() %}
+<div class="security-grid">
+{% endmacro %}
+
+{% macro security_item(icon, title, desc) %}
+<div class="security-item"><span class="icon">{{ icon }}</span><div><strong>{{ title }}</strong><br>{{ desc }}</div></div>
+{% endmacro %}
+
+{% macro security_grid_end() %}
+</div>
+{% endmacro %}
+
+{# ── Mermaid diagram ── #}
+{% macro diagram(code) %}
+<div class="diagram-wrap">
+<div class="mermaid">
+{{ code }}
+</div>
+</div>
+{% endmacro %}
+
+{# ── Directory tree ── #}
+{% macro dir_tree(text) %}
+<div class="dir-tree">
+{{ text }}
+</div>
+{% endmacro %}
+
+{# ── Glossary card (for glossary section) ── #}
+{% macro glossary_grid_start() %}
+<div class="glossary-grid">
+{% endmacro %}
+
+{% macro glossary_card(id, name, definition) %}
+<div class="glossary-card" id="{{ id }}"><strong>{{ name }}</strong> {{ definition }}</div>
+{% endmacro %}
+
+{% macro glossary_grid_end() %}
+</div>
+{% endmacro %}
+
+{# ── Subtitle ── #}
+{% macro subtitle(text) %}
+<p class="subtitle">{{ text }}</p>
+{% endmacro %}
